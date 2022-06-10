@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const login = () => {
+const Login = () => {
   return (
     <StLoginBox>login</StLoginBox>
   )
@@ -14,4 +14,4 @@ const StLoginBox = styled.div`
 
 `;
 
-export default login
+export default Login
