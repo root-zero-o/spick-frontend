@@ -25,11 +25,12 @@ const Header = () => {
 const StHeaderWrapper = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     width : 100vw;
     min-width: 800px;
     height: 15vh;
     min-height: 150px;
+    margin: 30px 0px;
 `;
 
 const StLogoDiv = styled.div`
@@ -37,6 +38,7 @@ const StLogoDiv = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 300px;
     margin: 40px;
 `;
 
@@ -56,7 +58,8 @@ const StLogInDiv = styled.div`
     position: relative;
     display: flex;
     justify-content: flex-start;
-    width: 70%;
+    width: 55vw;
+    min-width: 500px;
     height: 50px;
     margin-right: 10%;
     background: #3B6591;
@@ -84,7 +87,7 @@ const StSearchInput = styled.input`
     position: absolute;
     right: 5px;
     width: 50%;
-    max-width: 500px;
+    max-width: 400px;
     height: 25px;
     margin: 5px;
     padding: 5px;
