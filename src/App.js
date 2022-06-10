@@ -6,7 +6,7 @@ import "./App.css";
 function App() {
   return (
     <div>
-     제발 되라
+     헤헤헤 히히힣
     </div>
   );
 }
