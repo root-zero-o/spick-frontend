@@ -1,32 +1,27 @@
 import React from "react";
 import styled from "styled-components";
 import Rank from "./Rank";
-// import image
+// import styled-components
+import {StContainer} from "./StyleG";
+// import images
 import leftArrow from "../images/left-arrow.png";
 import rightArrow from "../images/right-arrow.png";
 
+
 const RankContainer = () => {
   return (
-    <StRankContainer>
+    <StContainer height="250px">
         <StRankWrap>
-          <StArrow><StImg src={leftArrow}/></StArrow>
+          <StArrow src={leftArrow}></StArrow>
           <Rank/>
           <Rank/>
           <Rank/>
           <Rank/>
-          <StArrow><StImg src={rightArrow}/></StArrow>
+          <StArrow src={rightArrow}></StArrow>
         </StRankWrap>
-    </StRankContainer>
+    </StContainer>
   )
 }
-
-const StRankContainer = styled.div`
-  display: flex;
-  align-items: center;
-  width: 900px;
-  height: 250px;
-  padding: 15px;
-`;
 
 const StRankWrap = styled.div`
   display: flex;
@@ -36,9 +31,9 @@ const StRankWrap = styled.div`
   width: 100%;
 `;
 
-const StArrow = styled.button`
-  height: 50%;
-  width: 80px;
+const StArrow = styled.img`
+  height: 30%;
+  width: 30px;
   background: rgba(0,0,0,0.3);
   box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
   border: none;
