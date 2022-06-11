@@ -1,7 +1,11 @@
+/* IMPORT */
 import React from "react"
+// import components
 import styled from "styled-components";
 // import image
 import logo from "../images/logo.png";
+// import Router
+import { Link } from 'react-router-dom';
 
 // 헤더
 const Header = () => {
@@ -13,8 +17,8 @@ const Header = () => {
             <StLogo>SPICK</StLogo>
         </StLogoDiv>
         <StLogInDiv>
-            <StBtn>로그인</StBtn>
-            <StBtn>회원가입</StBtn>
+            <Link to={'/login'}><StBtn>로그인</StBtn></Link>
+            <Link to={'/signup'}><StBtn>회원가입</StBtn></Link>
             <StSearchInput placeholder="검색하기"/>
             <StSearchBtn>🔍</StSearchBtn>
         </StLogInDiv>
@@ -22,10 +26,12 @@ const Header = () => {
   )
 }
 
+/* STYLED-COMPONENTS */
+
 const StHeaderWrapper = styled.div`
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     width : 100vw;
     min-width: 800px;
     height: 15vh;
@@ -35,22 +41,21 @@ const StHeaderWrapper = styled.div`
 
 const StLogoDiv = styled.div`
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 300px;
-    margin: 40px;
+    margin: 30px;
 `;
 
 const StImg = styled.img`
     width: 50px;
     height: 50px;
-    margin: 10px;
+    margin: 20px;
 `; 
 
 const StLogo = styled.h2`
-    font-size: 28px;
     color: #cbcbca;
+    font-size: 35px;
     letter-spacing: 3px;
 `;
 
@@ -61,7 +66,7 @@ const StLogInDiv = styled.div`
     width: 55vw;
     min-width: 500px;
     height: 50px;
-    margin-right: 10%;
+    margin-right: 7%;
     background: #3B6591;
     background: rgb(59,101,145);
     background: -moz-linear-gradient(left, rgb(59,101,145) 0%, rgb(52,110,159) 27%, rgb(27,56,126) 100%);
@@ -73,8 +78,8 @@ const StLogInDiv = styled.div`
 const StBtn = styled.button`
     width: 100px;
     height: 100%;
-    color: white;
     background-color: transparent;
+    color: white;
     font-size: 15px;
     border: none;
     &:hover{
