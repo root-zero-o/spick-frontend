@@ -1,8 +1,10 @@
+/* IMPORT */
 import React from 'react'
-// import styled-components
-import {StContainer} from "./StyleG";
 // import components
 import Card from "./Card";
+import {StContainer} from "./StyleG";
+
+// home 화면 카드들 map 돌리는 컴포넌트
 
 export const CardContainer = () => {
   return (

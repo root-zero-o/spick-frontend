@@ -1,12 +1,14 @@
+/* IMPORT */
 import React from "react";
-import styled from "styled-components";
+// import components
 import Rank from "./Rank";
-// import styled-components
+import styled from "styled-components";
 import {StContainer} from "./StyleG";
 // import images
 import leftArrow from "../images/left-arrow.png";
 import rightArrow from "../images/right-arrow.png";
 
+// Rank map돌리는 컴포넌트
 
 const RankContainer = () => {
   return (
@@ -23,12 +25,14 @@ const RankContainer = () => {
   )
 }
 
+/* STYLED-COMPONENTS */
+
 const StRankWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 90%;
   width: 100%;
+  height: 90%;
 `;
 
 const StArrow = styled.img`
@@ -38,13 +42,9 @@ const StArrow = styled.img`
   box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
   border: none;
   &:hover{
-    cursor: pointer;
     background-color: rgba(255,255,255,0.1);
+    cursor: pointer;
   }
 `;
 
-const StImg = styled.img`
-    width: 60%;
-    height: 50%;
-`;
 export default RankContainer;

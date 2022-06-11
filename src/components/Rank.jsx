@@ -1,6 +1,8 @@
+/* IMPORT */
 import React from 'react'
 import styled from 'styled-components';
 
+// Rank 부분 카드 하나하나를 나타내는 컴포넌트
 const Rank = () => {
   return (
     <StRankWrap>
@@ -13,6 +15,8 @@ const Rank = () => {
     </StRankWrap>
   )
 }
+
+/* STYLED-COMPONENTS */
 
 const StRankWrap = styled.div`
     display: flex;
@@ -44,14 +48,14 @@ const StText = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-right: 5px;
   height: 20%;  
+  margin-right: 5px;
 `;
 
 const StLike = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   width: 70px;
   height: 60%;
   background-color: #2d5069;

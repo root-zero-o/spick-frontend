@@ -1,4 +1,6 @@
+/* IMPORT */
 import React from "react"
+// import components
 import styled from "styled-components";
 // import image
 import logo from "../images/logo.png";
@@ -24,10 +26,12 @@ const Header = () => {
   )
 }
 
+/* STYLED-COMPONENTS */
+
 const StHeaderWrapper = styled.div`
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     width : 100vw;
     min-width: 800px;
     height: 15vh;
@@ -50,8 +54,8 @@ const StImg = styled.img`
 `; 
 
 const StLogo = styled.h2`
-    font-size: 35px;
     color: #cbcbca;
+    font-size: 35px;
     letter-spacing: 3px;
 `;
 
@@ -74,8 +78,8 @@ const StLogInDiv = styled.div`
 const StBtn = styled.button`
     width: 100px;
     height: 100%;
-    color: white;
     background-color: transparent;
+    color: white;
     font-size: 15px;
     border: none;
     &:hover{
