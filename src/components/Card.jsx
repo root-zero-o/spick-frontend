@@ -1,36 +1,44 @@
 /* IMPORT */
 import React from 'react'
 import styled from 'styled-components';
+// import Router
+import { Link } from 'react-router-dom';
 
 // home 화면에서 게시글을 보여주는 card 하나에 해당하는 컴포넌트
 
-const Card = () => {
+const Card = ({id, board_title, board_imgURL, nickname, user_picURL, like}) => {
   return (
-    <StCardBox>
-        <StPostBox width="55%">
-            <StImg></StImg>
-            <StDiv>
-                <StSpan>Witcher 3 : wild hunt</StSpan>
-            </StDiv>
-        </StPostBox>
-        <StPostBox width="45%">
-            <StDiv>
-                <StLikeDiv> 좋아요 0개</StLikeDiv>
-                <StUserImg></StUserImg>
-                <StSpan>근영</StSpan>
-            </StDiv>
-        </StPostBox>
-    </StCardBox> 
+    <StLink to={`/detail/${id}`}>
+        <StCardBox>
+            <StPostBox width="55%">
+                <StImg src={board_imgURL}></StImg>
+                <StDiv>
+                    <StSpan>{board_title}</StSpan>
+                </StDiv>
+            </StPostBox>
+            <StPostBox width="45%">
+                <StDiv>
+                    <StLikeDiv> 좋아요 {like}개</StLikeDiv>
+                    <StUserImg src={user_picURL}></StUserImg>
+                    <StSpan>{nickname}</StSpan>
+                </StDiv>
+            </StPostBox>
+        </StCardBox> 
+    </StLink>
   )
 }
 
 /* STYLED-COMPONENT */
 
+const StLink = styled(Link)`
+    text-decoration: none;
+`;
+
 const StCardBox = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: 900px;
     height: 120px;
     margin: 10px 0px;
     background-color: rgba(0,0,0,0.2);
@@ -60,24 +68,22 @@ const StLikeDiv = styled.div`
     text-align: center;
 `;
 
-const StUserImg= styled.div`
+const StUserImg= styled.img`
     width: 50px;
     height: 50px;
     margin: 0px 10px;
-    background-color: tomato;
     border-radius: 50%;
 `;
 
 
-const StImg = styled.div`
+const StImg = styled.img`
     width: 500px;
     height: 100%;
-    background-color: #ddd;
 `;
 
 const StDiv = styled.div`
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     width :600px;
     margin: 20px;

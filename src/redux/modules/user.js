@@ -105,7 +105,6 @@ export const __login=(payload)=>{
   console.log(payload)
   return async function(dispatch,getState){
     try{
-      console.log("hi")
       dispatch(serverReq(true));
    const login = await axios({
     method:"post",
@@ -116,7 +115,7 @@ export const __login=(payload)=>{
     }
    })
    console.log(login)
-   const accessToken=login.data.token;
+   const accessToken=login.headers.authorization;
    setCookie("token",accessToken);
    dispatch(reqSucess(true));
    alert("Hello!!");

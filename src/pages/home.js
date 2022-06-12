@@ -9,8 +9,8 @@ import CardContainer from "../components/CardContainer";
 export const Home = () => {
   return (
     <StHomeWrap>
-    <Header/>
-     <StTitle>Best Games</StTitle>
+      <Header/>
+      <StTitle>Best Games</StTitle>
       <RankContainer/>
       <StTitle>Game Reviews</StTitle>
       <CardContainer/>
@@ -23,6 +23,7 @@ const StHomeWrap = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100vw;
 `;
 
 const StTitle = styled.h2`
