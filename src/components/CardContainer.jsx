@@ -21,9 +21,9 @@ const CardContainer = () => {
 
   return (
     <StContainer>
-        {postList.map((value) => {
+        {postList.map((value, index) => {
           return <Card
-            key={value.id}
+            key={index}
             id={value.id}
             board_title={value.board_title}
             board_imgURL={value.board_imgURL}

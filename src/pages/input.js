@@ -1,11 +1,19 @@
-/* IMPORT */
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
+import { useDispatch  } from 'react-redux';
 import styled from 'styled-components'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // import components
-import Header from '../components/Header'
+import Header from '../components/Header';
+// import middleware
+import { addPostDB } from "../redux/modules/post";
 
 const Input = () => {
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const titleInput = useRef(null);
+  const textInput = useRef(null);
 
   // 이미지 미리보기 state
   const [fileImage, setFileImage] = useState("");
@@ -17,11 +25,22 @@ const Input = () => {
     setFileUploaded(true);
   }
 
+  const onAddPostHandler = () => {
+    dispatch(addPostDB({
+      title: titleInput.current.value, 
+      imgURL : fileImage,
+      text: textInput.current.value
+    }));
+    alert("게시글이 등록되었습니다.");
+    navigate('/');
+
+  }
+
   return (
     <StInputWrap>
       <Header/>
-      <StInputBox>
-        <StTitleInput placeholder="Title"/>
+      <StInputBox onSubmit={onAddPostHandler}>
+        <StTitleInput placeholder="Title" ref={titleInput} required/>
         <div style={{display:"flex", width:"770px", height:"400px"}}>
           {fileUploaded ? (
             <StImg src={fileImage}></StImg>
@@ -33,8 +52,12 @@ const Input = () => {
               id="file" 
               accept="image/*" 
               style={{display:"none"}}
-              onChange={saveFileImage}/>
-            <StTextInput placeholder="Introduce your favorite game!"/>
+              onChange={saveFileImage}
+              required/>
+            <StTextInput 
+              placeholder="Introduce your favorite game!" 
+              ref={textInput}
+              required/>
             <StBtnDiv>
               <StBtn>작성완료</StBtn>
               <Link to={'/'}><StBtn>취소</StBtn></Link>

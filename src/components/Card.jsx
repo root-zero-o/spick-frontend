@@ -9,21 +9,21 @@ import { Link } from 'react-router-dom';
 const Card = ({id, board_title, board_imgURL, nickname, user_picURL, like}) => {
   return (
     <StLink to={`/detail/${id}`}>
-    <StCardBox>
-        <StPostBox width="55%">
-            <StImg src={board_imgURL}></StImg>
-            <StDiv>
-                <StSpan>{board_title}</StSpan>
-            </StDiv>
-        </StPostBox>
-        <StPostBox width="45%">
-            <StDiv>
-                <StLikeDiv> 좋아요 {like}개</StLikeDiv>
-                <StUserImg src={user_picURL}></StUserImg>
-                <StSpan>{nickname}</StSpan>
-            </StDiv>
-        </StPostBox>
-    </StCardBox> 
+        <StCardBox>
+            <StPostBox width="55%">
+                <StImg src={board_imgURL}></StImg>
+                <StDiv>
+                    <StSpan>{board_title}</StSpan>
+                </StDiv>
+            </StPostBox>
+            <StPostBox width="45%">
+                <StDiv>
+                    <StLikeDiv> 좋아요 {like}개</StLikeDiv>
+                    <StUserImg src={user_picURL}></StUserImg>
+                    <StSpan>{nickname}</StSpan>
+                </StDiv>
+            </StPostBox>
+        </StCardBox> 
     </StLink>
   )
 }
@@ -83,7 +83,7 @@ const StImg = styled.img`
 
 const StDiv = styled.div`
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     width :600px;
     margin: 20px;
