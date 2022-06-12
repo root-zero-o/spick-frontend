@@ -17,15 +17,6 @@
       "nickname": "석우",
       "user_picURL": "https://avatars.githubusercontent.com/u/105151560?v=4",
       "like": 1
-    },
-    {
-      "board_title": "위쳐3 게롤트",
-      "board_imgURL": "blob:http://localhost:3000/2e8be19e-fd08-4898-864d-94c150656bef",
-      "board_text": "멋있음",
-      "nickname": "근영",
-      "user_picURL": "https://avatars.githubusercontent.com/u/97326130?v=4",
-      "like": 3,
-      "id": 3
     }
   ]
 }
