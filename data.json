@@ -1,22 +1,22 @@
 {
     "posts": [
       {
-        "id": 1,
+        "id":1,
         "board_title": "Witcher 3 : Wild hunt",
         "board_imgURL": "https://cdn.akamai.steamstatic.com/steam/apps/355880/capsule_616x353.jpg?t=1646335562",
         "board_text": "위쳐3는 내 인생 게임 ㅠㅠ",
         "nickname": "영근",
         "user_picURL":"https://avatars.githubusercontent.com/u/97326130?v=4",
-        "like": 100
+        "like":100
       },
       {
-        "id": 2,
+        "id":2,
         "board_title": "Company of Heroes3",
         "board_imgURL": "https://cdn.akamai.steamstatic.com/steam/apps/228200/capsule_616x353.jpg?t=1632304482",
         "board_text": "이거 진짜 재밌는데 사람들이 잘 모르네",
         "nickname": "석우",
         "user_picURL":"https://avatars.githubusercontent.com/u/105151560?v=4",
-        "like": 1
+        "like":1
       }
     ]
   }

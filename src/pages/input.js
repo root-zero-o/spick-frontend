@@ -34,7 +34,7 @@ const Input = () => {
               accept="image/*" 
               style={{display:"none"}}
               onChange={saveFileImage}/>
-            <StTextInput placeholder="text"/>
+            <StTextInput placeholder="Introduce your favorite game!"/>
             <StBtnDiv>
               <StBtn>작성완료</StBtn>
               <Link to={'/'}><StBtn>취소</StBtn></Link>
