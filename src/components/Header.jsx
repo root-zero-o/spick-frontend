@@ -19,6 +19,7 @@ const Header = () => {
         <StLogInDiv>
             <Link to={'/login'}><StBtn>로그인</StBtn></Link>
             <Link to={'/signup'}><StBtn>회원가입</StBtn></Link>
+            <Link to={'/input'}><StBtn>글쓰기</StBtn></Link>
             <StSearchInput placeholder="검색하기"/>
             <StSearchBtn>🔍</StSearchBtn>
         </StLogInDiv>
@@ -32,7 +33,7 @@ const StHeaderWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width : 100vw;
+    width : 1050px;
     min-width: 800px;
     height: 15vh;
     min-height: 150px;
@@ -43,7 +44,7 @@ const StLogoDiv = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 300px;
+    width: 250px;
     margin: 30px;
 `;
 
@@ -63,7 +64,7 @@ const StLogInDiv = styled.div`
     position: relative;
     display: flex;
     justify-content: flex-start;
-    width: 55vw;
+    width: 70vw;
     min-width: 500px;
     height: 50px;
     margin-right: 7%;
@@ -76,7 +77,7 @@ const StLogInDiv = styled.div`
 `;
 
 const StBtn = styled.button`
-    width: 100px;
+    width: 90px;
     height: 100%;
     background-color: transparent;
     color: white;
@@ -91,7 +92,7 @@ const StBtn = styled.button`
 const StSearchInput = styled.input`
     position: absolute;
     right: 5px;
-    width: 50%;
+    width: 40%;
     max-width: 400px;
     height: 25px;
     margin: 5px;
