@@ -2,18 +2,21 @@
     "posts": [
       {
         "id": 1,
-        "title": "리덕스 미들웨어를 배워봅시다",
-        "body": "리덕스 미들웨어를 직접 만들어보면 이해하기 쉽죠."
+        "board_title": "Witcher 3 : Wild hunt",
+        "board_imgURL": "https://cdn.akamai.steamstatic.com/steam/apps/355880/capsule_616x353.jpg?t=1646335562",
+        "board_text": "위쳐3는 내 인생 게임 ㅠㅠ",
+        "nickname": "영근",
+        "user_picURL":"https://avatars.githubusercontent.com/u/97326130?v=4",
+        "like": 100
       },
       {
         "id": 2,
-        "title": "redux-thunk를 사용해봅시다",
-        "body": "redux-thunk를 사용해서 비동기 작업을 처리해봅시다!"
-      },
-      {
-        "id": 3,
-        "title": "redux-saga도 사용해봅시다",
-        "body": "나중엔 redux-saga를 사용해서 비동기 작업을 처리하는 방법도 배워볼 거예요."
+        "board_title": "Company of Heroes3",
+        "board_imgURL": "https://cdn.akamai.steamstatic.com/steam/apps/228200/capsule_616x353.jpg?t=1632304482",
+        "board_text": "이거 진짜 재밌는데 사람들이 잘 모르네",
+        "nickname": "석우",
+        "user_picURL":"https://avatars.githubusercontent.com/u/105151560?v=4",
+        "like": 1
       }
     ]
   }

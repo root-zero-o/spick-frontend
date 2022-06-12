@@ -12,10 +12,12 @@ const Header = () => {
 
   return (
     <StHeaderWrapper>
-        <StLogoDiv>
-            <StImg src={logo}/>
-            <StLogo>SPICK</StLogo>
-        </StLogoDiv>
+        <StLink to={'/'}>
+            <StLogoDiv>
+                <StImg src={logo}/>
+                <StLogo>SPICK</StLogo>
+            </StLogoDiv>
+        </StLink>
         <StLogInDiv>
             <Link to={'/login'}><StBtn>로그인</StBtn></Link>
             <Link to={'/signup'}><StBtn>회원가입</StBtn></Link>
@@ -33,18 +35,22 @@ const StHeaderWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width : 1050px;
+    width : 1100px;
     min-width: 800px;
     height: 15vh;
     min-height: 150px;
     margin: 30px 0px;
 `;
 
+const StLink = styled(Link)`
+    text-decoration: none;
+`;
+
 const StLogoDiv = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 250px;
+    width: 230px;
     margin: 30px;
 `;
 

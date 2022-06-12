@@ -2,8 +2,11 @@
 import React from 'react'
 import styled from 'styled-components'
 
+
 // detail 페이지에서 해당 게시글 정보가 담기는 컴포넌트
 const DetailBox = () => {
+
+
   return (
     <StDetailContainer>
       <StDetailBox>
