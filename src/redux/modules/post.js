@@ -37,7 +37,7 @@ export const getPostsDB = () => {
   return async function(dispatch, getState) {
     try {
       dispatch(getLoading(true));
-      const { data } = await axios.get("http://localhost:4000/posts");
+      const { data } = await axios.get("");
       dispatch(getPostsSuccess(data));
     }
     catch (error) {
@@ -55,7 +55,8 @@ export const addPostDB = ({title, imgURL, text}) => {
     try {
       dispatch(getLoading(true));
       // const slicedImgURL = imgURL.slice(5, imgURL.length);
-      await axios.post("http://localhost:4000/posts", {
+
+      axios.post("", {
         board_title : title,
         board_imgURL : imgURL,
         board_text : text,

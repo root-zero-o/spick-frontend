@@ -2,8 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux/es/exports';
 import { useRef } from 'react';
-import { __signUp, __loadUser } from '../redux/modules/user';
+import { __signUp, __loadUser, __idCheck } from '../redux/modules/user';
 import "./signup.css";
 const Signup = () => {
   const dispatch = useDispatch();
@@ -13,18 +14,37 @@ const Signup = () => {
   const user_nickname = useRef(null);
   const password = useRef(null);
   const passwordCheck = useRef(null);
+  const idcheck = useSelector(state=>state.user.idcheck);
+  const nickcheck = useSelector(state=>state.user.nickcheck);
+
+
   const moveLog=()=>{
     navigate("/login");
   }
+
   const submit=()=>{
     dispatch(__signUp({
       username : user_email.current.value,
       password : password.current.value,
       nickname : user_nickname.current.value,
+      passwordCheck : passwordCheck.current.value,
     }))
-    console.log("Hi")
     navigate("/");
   }
+
+  const emailCheck=()=>{
+    dispatch(__idCheck({
+      username : user_email.current.value,
+    }))
+  }
+
+  const nickCheck=()=>{
+    dispatch(__idCheck({
+      username : user_nickname.current.value,
+    }))
+  }
+
+
   return (
    <StBack>
     <StSignBox>
@@ -40,14 +60,28 @@ const Signup = () => {
       </div> */}
       <br/>
       </StPhoto>
-      <StEmail>Email Adress</StEmail>
-      <StInput placeholder='aaa@aaa.aaa' ref={user_email}/>
-      <StEmail>Steam Account name</StEmail>
-      <StInput placeholder='Luke' ref={user_nickname}/>
-      <StEmail>Password</StEmail>
-      <StInput type="password" ref={password}/>
-      <StEmail>Password Check</StEmail>
-      <StInput type="password" ref={passwordCheck}/><br/>
+      <Box>
+        <StEmail>Email Adress</StEmail>
+        <CheckBox>
+          <StInput placeholder='aaa@aaa.aaa' ref={user_email}/>
+          <IdCheckButton onClick={emailCheck}>Email Check</IdCheckButton>
+        </CheckBox>
+      </Box>
+      <Box>
+          <StEmail>Steam Account name</StEmail>
+          <CheckBox>
+            <StInput placeholder='Luke' ref={user_nickname}/>
+            <IdCheckButton onClick={nickCheck}>Nick Check</IdCheckButton>
+          </CheckBox>      
+      </Box>
+      <Box>
+        <StEmail>Password</StEmail>
+        <StInput type="password" ref={password}/>
+      </Box>
+      <Box>
+        <StEmail>Password Check</StEmail>
+        <StInput type="password" ref={passwordCheck}/><br/>
+      </Box>
       <StSubmit onClick={submit}>Submit</StSubmit>
       <StCancel onClick={moveLog}>Cancel</StCancel>
     </StInBox>
@@ -56,6 +90,38 @@ const Signup = () => {
    </StBack>
   )
 }
+
+const CheckBox=styled.div`
+display: flex;
+height:2rem;
+margin:0.5rem 0 0 0;
+`;
+
+const Box=styled.div`
+height:5rem;
+`;
+
+const IdCheckButton=styled.button`
+  width:5rem;
+  height:2rem;
+  margin : 0 0 0 0.5rem;
+  background: #3DA2F1;
+  border-radius: 2px;
+background: -moz-linear-gradient(left, #3DA2F1 0%, #3184E1 44%, #2460D0 100%);
+background: -webkit-linear-gradient(left, #3DA2F1 0%, #3184E1 44%, #2460D0 100%);
+background: linear-gradient(to right, #3DA2F1 0%, #3184E1 44%, #2460D0 100%);
+border: none;
+text-align: center;
+color:white;
+&:hover{
+  background: #47BFFF;
+background: -moz-linear-gradient(left, #47BFFF 0%, #3EA8F3 50%, #3287E3 100%);
+background: -webkit-linear-gradient(left, #47BFFF 0%, #3EA8F3 50%, #3287E3 100%);
+background: linear-gradient(to right, #47BFFF 0%, #3EA8F3 50%, #3287E3 100%);
+}
+cursor: pointer;
+`;
+
 const StPhoto = styled.div`
 margin: 0 0 0 10%;
 `;
@@ -99,6 +165,7 @@ background: linear-gradient(to right, #47BFFF 0%, #3EA8F3 50%, #3287E3 100%);
 }
 cursor: pointer;
 `;
+
 const StInput = styled.input`
   margin: 0 0 5% 10%;
   width:20rem;
@@ -136,7 +203,7 @@ color:#cbcbca;
 font-size:12px;
 margin:0 0 0 0;
 `;
-const StSignBox =styled.form`
+const StSignBox =styled.div`
   width:41rem;
   height:50rem;
   min-height: 50rem;

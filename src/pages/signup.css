@@ -13,6 +13,7 @@ background: linear-gradient(to bottom, #434953 0%, #3A3F47 52%, #33383E 100%);
   border-bottom-color: #E2E2E2;
   border-radius: .25em;
 }
+
 .filebox input[type="file"] {  /* 파일 필드 숨기기 */
   position: absolute;
   width: 1px;
