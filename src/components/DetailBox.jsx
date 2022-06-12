@@ -7,6 +7,8 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 // import Image
 import likeLogo from "../images/likeLogo.png";
+// import middleware
+import { deletePostDB } from "../redux/modules/post";
 
 
 // detail 페이지에서 해당 게시글 정보가 담기는 컴포넌트
@@ -25,6 +27,10 @@ const DetailBox = () => {
       setPost(post)
     }
   },[dispatch, postId, postList])
+
+  const onDeletePostHandler = () => {
+    dispatch(deletePostDB(postId));
+  }
 
   return (
     <StDetailContainer>
@@ -46,7 +52,7 @@ const DetailBox = () => {
             </div>
             <div style={{height:"10%", display:"flex", justifyContent:"center", alignItems:"center"}}>
               <StLink to={`/edit`}><StBtn>수정하기</StBtn></StLink>
-              <StBtn>삭제하기</StBtn>
+              <StBtn onClick={onDeletePostHandler}>삭제하기</StBtn>
             </div>
           </StContentBox> 
         </StDiv>   
