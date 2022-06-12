@@ -4,7 +4,8 @@ import axios from "axios";
 const GET_POSTS_SUCCESS = "post/GET_POSTS_SUCCESS";
 const GET_LOADING = "post/GET_LOADING";
 const GET_ERROR = "post/ERROR";
-const ADD_POST_SUCCESS = "post"
+const ADD_POST_SUCCESS = "post/ADD_POST_SUCCESS";
+const DELETE_POST_SUCCESS = "post/DELETE_POST_SUCCESS";
 
 
 /* 액션 생성함수 */
@@ -19,6 +20,9 @@ const getError = (payload) => ({
 })
 const addPostSuccess = () => ({
   type: ADD_POST_SUCCESS
+})
+const deletePostSuccess = () => ({
+  type: DELETE_POST_SUCCESS
 })
 
 /* 초기 상태 선언 */
@@ -37,8 +41,8 @@ export const getPostsDB = () => {
       dispatch(getPostsSuccess(data));
     }
     catch (error) {
-      console.log(error)
       dispatch(getError(true));
+      alert("네트워크 오류!")
     }
     finally {
       dispatch(getLoading(false));
@@ -51,6 +55,7 @@ export const addPostDB = ({title, imgURL, text}) => {
     try {
       dispatch(getLoading(true));
       // const slicedImgURL = imgURL.slice(5, imgURL.length);
+
       axios.post("", {
         board_title : title,
         board_imgURL : imgURL,
@@ -62,11 +67,29 @@ export const addPostDB = ({title, imgURL, text}) => {
       })
       dispatch(addPostSuccess());
     }
-    catch {
-
+    catch(error) {
+      dispatch(getError(true));
+      alert("네트워크 오류로 글을 작성하지 못했어요 :(")
     }
     finally {
+      dispatch(getLoading(true));
+    }
+  }
+}
 
+export const deletePostDB = (id) => {
+  return async function (dispatch, getState){
+    try {
+      dispatch(getLoading(true));
+      await axios.delete(`http://localhost:4000/posts/${id}`);
+      alert("게시글이 삭제되었습니다.");
+    }
+    catch(error) {
+      dispatch(getError(true));
+      alert("네트워크 오류로 글을 삭제하지 못했어요 :(");
+    }
+    finally {
+      dispatch(getLoading(false));
     }
   }
 }
