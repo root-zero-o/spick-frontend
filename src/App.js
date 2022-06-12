@@ -12,7 +12,6 @@ import Detail from './pages/detail';
 
 
 
-
 function App() {
   return (
     <Routes>
@@ -23,7 +22,7 @@ function App() {
       <Route path = "/mypage/:user_id" element={<Mypage/>}/>
       <Route path = "/input" element={<Input/>}/>
       <Route path = "/edit:post_id" element={<Edit/>}/>
-      <Route path = "/detail" element={<Detail/>}/>
+      <Route path = "/detail/:id" element={<Detail/>}/>
     </Routes>
   );
 }

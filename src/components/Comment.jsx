@@ -5,44 +5,93 @@ import styled from 'styled-components'
 // 댓글 박스 하나 나타내는 컴포넌트!
 
  const Comment = () => {
+    const islogin = true;
+
   return (
     <StCommentBox>
-        <StDiv width="25%">
-            <StUserImg></StUserImg>
-            <div style={{fontWeight:"bold"}}>석우</div>
-        </StDiv>
-        <StDiv width="75%">컴퍼니 오브 히어로즈 재밌음 ㅡㅡ</StDiv>
+    <StUserBox><StUserPic/><StUserNick></StUserNick></StUserBox>
+    <StTextBox/>
+    {islogin?
+    (<StButtons>
+        <StButton>Edit</StButton>
+        <StButton>Delete</StButton>
+    </StButtons>):
+    <></>}
     </StCommentBox>
+    
   )
 }
 
 /* STYLED-COMPONENTS */
 
-const StCommentBox = styled.div`
+
+const StButton=  styled.button`
+    width:5rem;
+    height:2rem;
+    margin: 9px 0 9px 1rem;
+    text-align: center;
+    background-color: #2b4553;
+    color: #46a1d9;
+    border:none;
+    border-radius: 0.3rem;
+    &:hover{
+        background: #66BFF2;
+background: -moz-linear-gradient(left, #66BFF2 0%, #549EC9 50%, #417A9B 100%);
+background: -webkit-linear-gradient(left, #66BFF2 0%, #549EC9 50%, #417A9B 100%);
+background: linear-gradient(to right, #66BFF2 0%, #549EC9 50%, #417A9B 100%);
+color:white;   
+}
+    cursor: pointer;
+`;
+
+const StButtons=styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+`;
+
+const StUserNick=styled.p`
+    width:6rem;
+    height:2rem;
+    margin:0 0 0 1rem;
+    background-color: yellow;
+`;
+
+const StUserPic=styled.img`
+    width:4rem;
+    height: 4rem;
+    background-color: yellow;
+    margin:0 0 0.5rem 0.7rem;
+`;
+
+const StUserBox=styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 7.5rem;
+    height:8rem;
+    margin: 0 0 0 1rem;
+    
+    
+`;
+
+const StTextBox = styled.div`
+    text-align: center;
+    width:500px;
+    height:8rem;
+    margin:0 0 0 3rem;
+    background-color: yellow;
+`;
+
+const StCommentBox=styled.div`
     display: flex;
     align-items: center;
     width: 800px;
-    height: 90px;
+    height: 10rem;
     margin: 10px 0px;
-    background-color: #16202d;
+    background-color: rgba(39,65,86,255);
     border-top: 2px solid #264357;
 `;
 
-const StDiv = styled.div`
-    display: flex;
-    align-items: center;
-    width: ${(props)=> props.width};
-    height: 80%;
-    margin: 30px;
-    color: white;
-`;
-
-const StUserImg = styled.div`
-    width: 40px;
-    height: 40px;
-    margin-right: 20px;
-    background-color: tomato;
-    border-radius: 50%;
-`;
 
 export default Comment;

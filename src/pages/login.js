@@ -12,7 +12,10 @@ const Login = () => {
   const dispatch = useDispatch();
   const user_email = useRef(null);
   const user_pw = useRef(null);
-  const login= async()=>{
+
+
+  const login= (event)=>{
+    event.preventDefault();
     dispatch(__login({
       username:user_email.current.value,
       password:user_pw.current.value,
@@ -24,6 +27,7 @@ const Login = () => {
   const moveSign=()=>{
     navigate("/signup");
   }
+  
   return (
     <StBack>
     <StLoginBox onSubmit={login}>
