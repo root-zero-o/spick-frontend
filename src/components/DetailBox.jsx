@@ -1,26 +1,52 @@
 /* IMPORT */
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+// import Router
+import { Link } from 'react-router-dom';
+// import Image
+import likeLogo from "../images/likeLogo.png";
+
 
 // detail 페이지에서 해당 게시글 정보가 담기는 컴포넌트
 const DetailBox = () => {
+
+  const dispatch = useDispatch();
+  const postId = useParams().id;
+
+  const [post, setPost] = useState(undefined);
+
+  const postList = useSelector(state => state.post.list)
+
+  useEffect(() => {
+    const post = postList.find(value => postId === String(value.id));
+    if(post){
+      setPost(post)
+    }
+  },[dispatch, postId, postList])
+
   return (
     <StDetailContainer>
       <StDetailBox>
-        <h2 style={{color:"white"}}>Witcher 3 : wild hunt</h2>
+        <h2 style={{color:"white"}}>{post?.board_title}</h2>
         <StDiv>
-          <StImg>이미지박스</StImg>
+          <StImg src={post?.board_imgURL}></StImg>
           <StContentBox>
+            <StLikeBox>
+              <StLikeLogo><img src={likeLogo} style={{width:"70%", height: "80%"}}/></StLikeLogo>
+              <div style={{display:"flex", alignItems:"center", justifyContent:"center",width:"200px"}}>좋아요 {post?.like}개</div>
+            </StLikeBox>
             <StUserBox>
-              <StUserImg></StUserImg>
-              <span style={{fontWeight:"bold"}}>근영</span>
+              <StUserImg src={post?.user_picURL}></StUserImg>
+              <span style={{fontWeight:"bold"}}>{post?.nickname}</span>
             </StUserBox>
             <div style={{height:"90%"}}>
-              <span style={{color:"white"}}>컴퍼니 오브 히어로즈 누가함 </span>
+              <span style={{color:"white"}}>{post?.board_text}</span>
             </div>
             <div style={{height:"10%", display:"flex", justifyContent:"center", alignItems:"center"}}>
-              <StLikeBox>좋아요 0개</StLikeBox>
-              <StLikeBox>댓글 0개</StLikeBox>
+              <StLink to={`/edit`}><StBtn>수정하기</StBtn></StLink>
+              <StBtn>삭제하기</StBtn>
             </div>
           </StContentBox> 
         </StDiv>   
@@ -54,10 +80,9 @@ const StDiv = styled.div`
   background: linear-gradient(135deg, rgba(38,57,75,1) 0%, rgba(21,27,31,1) 100%);
 `;
 
-const StImg = styled.div`
+const StImg = styled.img`
   width: 500px;
   height: 100%;
-  background-color: #ddd;
 `;
 
 const StContentBox = styled.div`
@@ -69,6 +94,26 @@ const StContentBox = styled.div`
   padding: 20px;
 `;
 
+const StLikeBox = styled.div`
+  display: flex;
+  width: 260px;
+  height: 70px;
+  background-color: #121a24;
+  color: white;
+`;
+
+const StLikeLogo = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1a435e;
+  width: 60px;
+  &:hover{
+    opacity: 0.5;
+    cursor: pointer;
+  }
+`;
+
 const StUserBox = styled.div`
   display: flex;
   align-items: center;
@@ -77,15 +122,18 @@ const StUserBox = styled.div`
   color: white;
 `;
 
-const StUserImg = styled.div`
+const StLink = styled(Link)`
+    text-decoration: none;
+`;
+
+const StUserImg = styled.img`
   width: 40px;
   height: 40px;
   margin-right: 10px;
-  background-color: tomato;
   border-radius: 50%;
 `;
 
-const StLikeBox = styled.div`
+const StBtn = styled.div`
   width: 100px;
   height: 25px;
   margin: 0px 5px;
@@ -94,6 +142,11 @@ const StLikeBox = styled.div`
   text-align: center;
   font-weight: bold;
   border-radius: 3px;
+  &:hover{
+    cursor: pointer;
+    background-color: #66c0f4;
+    color: white;
+  }
 `;
 
 
