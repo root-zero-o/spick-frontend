@@ -16,35 +16,40 @@ const Input = () => {
   const textInput = useRef(null);
 
   // 이미지 미리보기 state
-  const [fileImage, setFileImage] = useState("");
+  const [fileView, setFileView] = useState("");
+  const [file, setFile] = useState(undefined);
   const [fileUploaded, setFileUploaded] = useState(false);
 
   // 이미지 업로드 onchange event
   const saveFileImage = (event) => {
-    setFileImage(window.URL.createObjectURL(event.target.files[0]));
+    setFileView(window.URL.createObjectURL(event.target.files[0]));
     setFileUploaded(true);
+    setFile(event.target.files[0]);
+    window.URL.revokeObjectURL(fileView);
   }
 
-  const onAddPostHandler = () => {
-    dispatch(addPostDB({
-      title: titleInput.current.value, 
-      imgURL : fileImage,
-      text: textInput.current.value
-    }));
+  const onAddPostHandler = (event) => {
+    event.preventDefault();
+    if(file){
+      dispatch(addPostDB({
+        title: titleInput.current.value, 
+        img : file,
+        text: textInput.current.value
+      }));
+    }
     alert("게시글이 등록되었습니다.");
     navigate('/');
-
   }
 
   return (
     <StInputWrap>
       <Header/>
-      <StInputBox onSubmit={onAddPostHandler}>
+      <StInputBox>
         <StTitleInput placeholder="Title" ref={titleInput} required/>
         <div style={{display:"flex", width:"770px", height:"400px"}}>
           {fileUploaded ? (
-            <StImg src={fileImage}></StImg>
-          ) : (<StImgBox><span>No Image :(</span></StImgBox>)}
+            <StImg src={fileView}></StImg>) : 
+            (<StImgBox><span>No Image :(</span></StImgBox>)}
           <div style={{width:"50%", height:"100%"}}>
             <StLabel htmlFor="file">Choose Image file</StLabel>
             <input 
@@ -59,10 +64,9 @@ const Input = () => {
               ref={textInput}
               required/>
             <StBtnDiv>
-              <StBtn>작성완료</StBtn>
+              <StBtn onClick={onAddPostHandler}>작성완료</StBtn>
               <Link to={'/'}><StBtn>취소</StBtn></Link>
             </StBtnDiv>
-            
           </div>
         </div>
       </StInputBox>
@@ -78,7 +82,7 @@ const StInputWrap = styled.div`
   align-items: center;
 `;
 
-const StInputBox = styled.form`
+export const StInputBox = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -89,7 +93,7 @@ const StInputBox = styled.form`
   border-top: 5px solid #41799a;
 `;
 
-const StTitleInput = styled.input`
+export const StTitleInput = styled.input`
   width: 750px;
   margin: 20px 0px;
   padding: 10px;
@@ -100,7 +104,7 @@ const StTitleInput = styled.input`
   border: none;
 `;
 
-const StImg = styled.img`
+export const StImg = styled.img`
   width: 50%; 
   height: 100%;
 `;
@@ -117,7 +121,7 @@ const StImgBox = styled.div`
   font-weight: bold;
 `;
 
-const StLabel = styled.label`
+export const StLabel = styled.label`
   display: block;
   background: rgb(79,200,47);
   width: 345px;
@@ -132,7 +136,7 @@ const StLabel = styled.label`
   }
 `;
 
-const StTextInput = styled.textarea`
+export const StTextInput = styled.textarea`
   width: 343px;
   height: 250px;
   margin-left: 20px;
@@ -143,7 +147,7 @@ const StTextInput = styled.textarea`
   font-size: 17px;
 `;
 
-const StBtnDiv = styled.div`
+export const StBtnDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -153,7 +157,7 @@ const StBtnDiv = styled.div`
   margin-top: 10px;;
 `;
 
-const StBtn = styled.button`
+export const StBtn = styled.button`
   width: 170px;
   height: 50px;
   background: rgb(57,154,236);
