@@ -37,7 +37,7 @@ export const getPostsDB = () => {
   return async function(dispatch, getState) {
     try {
       dispatch(getLoading(true));
-      const { data } = await axios.get("http://localhost:4000/posts");
+      const { data } = await axios.get("");
       dispatch(getPostsSuccess(data));
     }
     catch (error) {
