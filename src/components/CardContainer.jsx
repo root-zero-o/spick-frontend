@@ -12,7 +12,7 @@ import { getPostsDB } from "../redux/modules/post";
 const CardContainer = () => {
 
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(getPostsDB())
   },[])
@@ -21,7 +21,7 @@ const CardContainer = () => {
 
   return (
     <StContainer>
-        {/* {postList.map((value, index) => {
+        {postList.map((value, index) => {
           return <Card
             key={index}
             id={value.id}
@@ -30,7 +30,7 @@ const CardContainer = () => {
             nickname={value.nickname}
             user_picURL={value.user_picURL}
             like={value.like}/>
-        })} */}
+        })}
     </StContainer>
   )
 }

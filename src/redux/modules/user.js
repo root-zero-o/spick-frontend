@@ -8,10 +8,7 @@ const initialState = {
   login:false,
   error:false,
   loading:false,
-  idcheck:true,
-  nickcheck:true,
 }
-
 
 const SERVER_REQ="user/SERVER_REQ"  // loading check
 const REQ_SUCCESS="user/REQ_SUCCESS"; // login check
@@ -43,30 +40,55 @@ export function NickCheck(payload){
   return{type:NICKCHECK,payload}
 }
 
-
-
 export const __idCheck = (payload)=>{
   console.log(payload)
   return async function(dispatch,getState){
-    const idcheck = await axios({
-      method:"post",
-      url : "",
-      data:{
-        username:payload.username,
-      }
-    });
-    dispatch(IdCheck(idcheck.data));
+    dispatch(serverReq(true))
+    try{
+      const idcheck = await axios({
+        method:"post",
+        url : "http://3.39.190.102:8080/api/checkId",
+        data:{
+          username:payload.username,
+        }
+      });
+      console.log(idcheck.data);
+      // dispatch(IdCheck(idcheck.headers.Username));
+      {(idcheck.data)?
+      (alert("You can use this email!")):(alert("Already Existing Email!!!!"))}
+    }
+    catch(error){
+      dispatch(reqError(true));
+      alert("Nope");
+    }
+    finally{
+      dispatch(serverReq(false))
+    }
   }
 }
 
 export const __nickCheck = (payload)=>{
   console.log(payload)
   return async function(dispatch,getState){
+    try{
     const nickcheck = await axios({
-      method:"get",
-      url : "",
+      method:"post",
+      url : "http://3.39.190.102:8080/api/checkNick",
+      data :{
+        nickname:payload.nickname,
+      }
     });
-    dispatch(NickCheck(nickcheck.data));
+    console.log(nickcheck.data)
+    {(nickcheck.data)?
+    (alert("You can use this email!")):(alert("Already Existing Email!!!!"))}
+  }
+  catch(error){
+    dispatch(reqError(true));
+    alert("Nope");
+  }
+  finally{
+    dispatch(serverReq(false))
+  }
   }
 }
 
@@ -75,9 +97,7 @@ export const __signUp=(payload)=>{
   return async function(dispatch,getState){
     // dispatch()
     dispatch(serverReq(true));
-    console.log("1")
     try{
-      console.log("2")
       const signup = await axios({
         method:"post",
         url : "http://3.39.190.102:8080/api/signup",
@@ -88,8 +108,6 @@ export const __signUp=(payload)=>{
           passwordCheck : payload.passwordCheck,
         }
        })
-       console.log("3")
-       console.log(signup.data)
     }catch(error){
       console.log(error);
       dispatch(reqError(true));
@@ -99,7 +117,6 @@ export const __signUp=(payload)=>{
     }
   }
 }
-
 
 export const __login=(payload)=>{
   console.log(payload)
@@ -117,6 +134,9 @@ export const __login=(payload)=>{
    console.log(login)
    const accessToken=login.headers.authorization;
    setCookie("token",accessToken);
+   setCookie("user_id",login.headers.username);
+   setCookie("user_nick",login.headers.nickname);
+   setCookie("user_pic",login.headers.userPic);
    dispatch(reqSucess(true));
    alert("Hello!!");
     }catch(error){

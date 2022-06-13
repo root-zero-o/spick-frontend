@@ -1,13 +1,26 @@
 import React from 'react'
 import styled from 'styled-components'
-
-
-
-
-
+import { useDispatch } from 'react-redux';
+import { useRef } from 'react';
+import { __postComment } from '../redux/modules/comment';
+import { getCookie } from '../Cookie';
 
 const Commenting = () => {
-    const islogin = false;
+
+    const dispatch=useDispatch();
+    const reply_text=useRef(null);
+
+    const submit=(event)=>{
+        event.preventDefault();
+        dispatch(__postComment({
+            reply_text: reply_text,
+            reply_id:getCookie("user_id"),
+            reply_nickname:getCookie("user_nick"),
+            reply_picURL:getCookie("user_pic"),
+        }))
+    }
+
+
   return (
     <CommentBox>
         
@@ -17,8 +30,8 @@ const Commenting = () => {
                 <UserPic/>
                 <UserNick></UserNick>
             </UserBox>
-            <InputBox/>
-            <SubmitButton>Submit</SubmitButton>
+            <InputBox ref={reply_text}/>
+            <SubmitButton onClick={submit}>Submit</SubmitButton>
         </Body>
     </CommentBox>
   )

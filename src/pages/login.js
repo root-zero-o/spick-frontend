@@ -6,13 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useRef } from 'react';
 import { __login } from '../redux/modules/user';
+import { setCookie } from '../Cookie';
 // 비밀번호 틀릴시 css 미구현
+
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user_email = useRef(null);
   const user_pw = useRef(null);
-
 
   const login= (event)=>{
     event.preventDefault();
@@ -20,14 +21,17 @@ const Login = () => {
       username:user_email.current.value,
       password:user_pw.current.value,
     }))
+    navigate("/");
   }
+
   const moveHome=()=>{
     navigate("/");
   }
+
   const moveSign=()=>{
     navigate("/signup");
   }
-  
+
   return (
     <StBack>
     <StLoginBox onSubmit={login}>
@@ -54,6 +58,7 @@ const Login = () => {
       </StBack>
   )
 }
+
 const StSignBox = styled.div`
   padding: 1rem;
   display: flex;

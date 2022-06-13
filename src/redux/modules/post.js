@@ -55,8 +55,7 @@ export const addPostDB = ({title, imgURL, text}) => {
     try {
       dispatch(getLoading(true));
       // const slicedImgURL = imgURL.slice(5, imgURL.length);
-
-      axios.post("", {
+      axios.post("http://localhost:4000/posts", {
         board_title : title,
         board_imgURL : imgURL,
         board_text : text,
