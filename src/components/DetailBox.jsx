@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 // import Router
 import { Link } from 'react-router-dom';
 // import Image
@@ -15,6 +15,7 @@ import { deletePostDB } from "../redux/modules/post";
 const DetailBox = () => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const postId = useParams().id;
 
   const [post, setPost] = useState(undefined);
@@ -30,6 +31,8 @@ const DetailBox = () => {
 
   const onDeletePostHandler = () => {
     dispatch(deletePostDB(postId));
+    alert("게시글이 삭제되었습니다.");
+    navigate('/');
   }
 
   return (
@@ -51,7 +54,7 @@ const DetailBox = () => {
               <span style={{color:"white"}}>{post?.board_text}</span>
             </div>
             <div style={{height:"10%", display:"flex", justifyContent:"center", alignItems:"center"}}>
-              <StLink to={`/edit`}><StBtn>수정하기</StBtn></StLink>
+              <StLink to={`/edit/${postId}`}><StBtn>수정하기</StBtn></StLink>
               <StBtn onClick={onDeletePostHandler}>삭제하기</StBtn>
             </div>
           </StContentBox> 
@@ -71,14 +74,14 @@ const StDetailContainer = styled.div`
   margin-bottom: 20px;
 `;
 
-const StDetailBox= styled.div`
+export const StDetailBox= styled.div`
   display: flex;
   flex-direction: column;
   width: 800px;
   height: 500px;
 `;
 
-const StDiv = styled.div`
+export const StDiv = styled.div`
   display: flex;
   height: 100%;
   margin-top: 10px;
@@ -86,12 +89,12 @@ const StDiv = styled.div`
   background: linear-gradient(135deg, rgba(38,57,75,1) 0%, rgba(21,27,31,1) 100%);
 `;
 
-const StImg = styled.img`
+export const StImg = styled.img`
   width: 500px;
   height: 100%;
 `;
 
-const StContentBox = styled.div`
+export const StContentBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -139,7 +142,7 @@ const StUserImg = styled.img`
   border-radius: 50%;
 `;
 
-const StBtn = styled.div`
+export const StBtn = styled.div`
   width: 100px;
   height: 25px;
   margin: 0px 5px;
