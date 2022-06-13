@@ -50,21 +50,27 @@ export const getPostsDB = () => {
   }
 }
 
-export const addPostDB = ({title, imgURL, text}) => {
+export const addPostDB = ({title, img, text}) => {
   return async function(dispatch, getState) {
     try {
       dispatch(getLoading(true));
-      // const slicedImgURL = imgURL.slice(5, imgURL.length);
-      axios.post("http://localhost:4000/posts", {
+      // formData 안에 data 넣기
+      let formData = new FormData();
+
+      formData.append("board_imgURL", img)
+
+      let stringData = [{
         board_title : title,
-        board_imgURL : imgURL,
         board_text : text,
-        // 이부분은 현재 로그인 된 유저 정보 받아서 넣기(getState)
         nickname: "근영",
         user_picURL: "https://avatars.githubusercontent.com/u/97326130?v=4",
         like: 3
-      })
-      dispatch(addPostSuccess());
+      }]
+      formData.append("data", new Blob([JSON.stringify(stringData)], {type: "application/json"}))
+      for(let value of formData.values()){
+        console.log(value);
+      }
+      await axios.post("http://localhost:4000/posts", formData)
     }
     catch(error) {
       dispatch(getError(true));
@@ -81,7 +87,6 @@ export const deletePostDB = (id) => {
     try {
       dispatch(getLoading(true));
       await axios.delete(`http://localhost:4000/posts/${id}`);
-      alert("게시글이 삭제되었습니다.");
     }
     catch(error) {
       dispatch(getError(true));
