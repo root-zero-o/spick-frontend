@@ -1,24 +1,81 @@
 /* IMPORT */
-import React from 'react'
+import React, { useState } from 'react'
+import { useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components'
+import { getCookie } from '../Cookie';
+import { __postComment,__editComment } from '../redux/modules/comment';
 
 // 댓글 박스 하나 나타내는 컴포넌트!
 
- const Comment = () => {
-    const islogin = true;
+ const Comment = (props) => {
+    const loginId = getCookie("user_id");
+    const dispatch = useDispatch();
+    const text = useRef(null);
+    const board_id = useParams().id;
+    const [isUser,setIsUser]=useState(true);
+    const [editCheck , setEditCheck]=useState(false);
+    
+    const edit=()=>{
+        setEditCheck(true);
+        dispatch(__editComment({
+            reply_id:props.user_id,
+            reply_nickname:props.user_nick,
+            reply_picURL:props.user_pic,
+            reply_text:text,
+            board_id:board_id,
+        }))
+    }
+    
+    const delet=()=>{
+        
+    }
+
+    const submit=(text,board_id)=>{
+        dispatch(__postComment({
+            reply_id:props.user_id,
+            reply_nickname:props.user_nick,
+            reply_picURL:props.user_pic,
+            reply_text:text,
+            board_id:board_id,
+        }))
+    }
+    // key = {index}
+    // id={value.id} 
+    // comment={value.reply_text} 
+    // user_id={value.reply_id} 
+    // user_pic={value.reply_picURL}
+    // user_nick={value.reply_nickname}/>
+
 
   return (
-    <StCommentBox>
-    <StUserBox><StUserPic/><StUserNick></StUserNick></StUserBox>
-    <StTextBox/>
-    {islogin?
-    (<StButtons>
-        <StButton>Edit</StButton>
-        <StButton>Delete</StButton>
-    </StButtons>):
-    <></>}
-    </StCommentBox>
-    
+    <>
+    {props.user_id==loginId?(
+    <>
+        {editCheck ? 
+        (<StCommentBox>
+            <StUserBox><StUserPic/><StUserNick></StUserNick></StUserBox>
+            <StInputBox ref={text}/>
+            <StButton onClick={()=>{submit(text,board_id)}}>Submit</StButton>
+        </StCommentBox>):
+        (<StCommentBox>
+            <StUserBox><StUserPic/><StUserNick></StUserNick></StUserBox>
+            <StTextBox/>
+                <StButtons>
+                    <StButton onClick={edit}>Edit</StButton>
+                    <StButton onClick={delet}>Delete</StButton>
+                </StButtons>
+        </StCommentBox>)}
+        </>):
+        (<>
+        <StCommentBox>
+            <StUserBox><StUserPic/><StUserNick></StUserNick></StUserBox>
+            <StTextBox/>
+        </StCommentBox>
+        </>)
+    }
+    </>
   )
 }
 
@@ -74,6 +131,16 @@ const StUserBox=styled.div`
     
     
 `;
+
+const StInputBox=styled.textarea`
+    
+    width:500px;
+    height:8rem;
+    margin:0 0 0 3rem;
+    background-color: tomato;
+    color: white;
+`;
+
 
 const StTextBox = styled.div`
     text-align: center;
