@@ -6,6 +6,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 // import middleware
 import { addPostDB } from "../redux/modules/post";
+// import FireBase storage
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "../shared/firebase";
 
 const Input = () => {
 
@@ -15,36 +18,47 @@ const Input = () => {
   const titleInput = useRef(null);
   const textInput = useRef(null);
 
-  // 이미지 미리보기 state
+  // local state
   const [fileView, setFileView] = useState("");
-  const [file, setFile] = useState(undefined);
   const [fileUploaded, setFileUploaded] = useState(false);
+  const [fileURL, setFileURL] = useState("");
 
   // 이미지 업로드 onchange event
   const saveFileImage = (event) => {
     setFileView(window.URL.createObjectURL(event.target.files[0]));
     setFileUploaded(true);
-    setFile(event.target.files[0]);
+    dispatch(uploadImgFB(event))
     window.URL.revokeObjectURL(fileView);
   }
 
-  const onAddPostHandler = (event) => {
-    event.preventDefault();
-    if(file){
-      dispatch(addPostDB({
-        title: titleInput.current.value, 
-        img : file,
-        text: textInput.current.value
-      }));
+  // 이미지 FB에 업로드하는 미들웨어
+  const uploadImgFB = (event) => {
+    return async function (dispatch){
+      const uploaded_file = await uploadBytes(
+        ref(storage, `images/${event.target.files[0].name}/`),
+        event.target.files[0]
+      );
+      const file_url = await getDownloadURL(uploaded_file.ref);
+      setFileURL(file_url);
     }
-    alert("게시글이 등록되었습니다.");
-    navigate('/');
   }
+
+    // 게시글 등록 버튼 onClick event
+    const onAddPostHandler = () => {
+      if(fileURL){
+        dispatch(addPostDB({
+          title : titleInput.current.value,
+          imgURL : fileURL,
+          text: textInput.current.value
+        }))
+      }
+      navigate('/');
+    }
 
   return (
     <StInputWrap>
       <Header/>
-      <StInputBox>
+      <StInputBox onSubmit={onAddPostHandler}>
         <StTitleInput placeholder="Title" ref={titleInput} required/>
         <div style={{display:"flex", width:"770px", height:"400px"}}>
           {fileUploaded ? (
@@ -64,7 +78,7 @@ const Input = () => {
               ref={textInput}
               required/>
             <StBtnDiv>
-              <StBtn onClick={onAddPostHandler}>작성완료</StBtn>
+              <StBtn>작성완료</StBtn>
               <Link to={'/'}><StBtn>취소</StBtn></Link>
             </StBtnDiv>
           </div>
