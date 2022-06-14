@@ -7,7 +7,6 @@ import DetailBox from '../components/DetailBox'
 import CommentContainer from '../components/CommentContainer'
 // import middleware
 import { getPostsDB } from "../redux/modules/post"
-import { __getComment } from '../redux/modules/comment';
 
 
 // detail 페이지
@@ -18,7 +17,6 @@ const Detail = () => {
 
 useEffect(() => {
   dispatch(getPostsDB())
-  dispatch(__getComment())
 },[])
 
   return (

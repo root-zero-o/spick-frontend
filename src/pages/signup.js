@@ -38,7 +38,7 @@ const Signup = () => {
       passwordCheck : passwordCheck.current.value,
       user_picURL : fileURL,
     }))
-    navigate("/");
+    navigate("/login");
   }
 
   // 이메일 체크

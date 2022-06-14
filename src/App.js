@@ -9,7 +9,7 @@ import Mypage from './pages/mypage';
 import Input from './pages/input';
 import Edit from './pages/edit';
 import Detail from './pages/detail';
-
+import AboutUs from './pages/aboutUs';
 
 
 function App() {
@@ -23,6 +23,7 @@ function App() {
       <Route path = "/input" element={<Input/>}/>
       <Route path = "/edit/:id" element={<Edit/>}/>
       <Route path = "/detail/:board_id" element={<Detail/>}/>
+      <Route path = "/aboutus" element={<AboutUs/>}/>
     </Routes>
   );
 }
