@@ -84,10 +84,12 @@ export const deletePostDB = (id) => {
   return async function (dispatch, getState){
     try {
       dispatch(getLoading(true));
-      await axios.delete(`http://3.39.190.102:8080/api/${id}`);
+      console.log(id)
+      await apis.deletePost(id);
     }
     catch(error) {
       dispatch(getError(true));
+      console.log(error);
       alert("네트워크 오류로 글을 삭제하지 못했어요 :(");
     }
     finally {

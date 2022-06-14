@@ -22,7 +22,7 @@ function App() {
       <Route path = "/mypage/:user_id" element={<Mypage/>}/>
       <Route path = "/input" element={<Input/>}/>
       <Route path = "/edit/:id" element={<Edit/>}/>
-      <Route path = "/detail/:id" element={<Detail/>}/>
+      <Route path = "/detail/:board_id" element={<Detail/>}/>
     </Routes>
   );
 }
