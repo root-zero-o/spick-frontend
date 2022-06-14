@@ -1,6 +1,7 @@
 import axios from "axios";
 import { storage } from "../../shared/firebase";
 import { ref, deleteObject } from "firebase/storage";
+import  apis  from "../../api/main";
 
 /* 액션 타입 */
 const GET_POSTS_SUCCESS = "post/GET_POSTS_SUCCESS";
@@ -39,11 +40,12 @@ export const getPostsDB = () => {
   return async function(dispatch, getState) {
     try {
       dispatch(getLoading(true));
-      const { data } = await axios.get("http://localhost:4000/posts");
+      const { data } = await apis.getPosts();
       dispatch(getPostsSuccess(data));
     }
     catch (error) {
       dispatch(getError(true));
+      console.log(error)
       alert("네트워크 오류!")
     }
     finally {
@@ -56,20 +58,13 @@ export const addPostDB = ({title, imgURL, text}) => {
   return async function(dispatch, getState) {
     try {
       dispatch(getLoading(true));
-      await axios.post("http://localhost:4000/posts", {
-        board_title : title,
-        board_imgURL : imgURL,
-        board_text: text,
-        // 이 부분은 URL 받으면 변경
-        nickname: "근영",
-        user_picURL: "https://avatars.githubusercontent.com/u/97326130?v=4",
-        like: 3
-      })
+      await apis.post({title, imgURL, text});
       dispatch(addPostSuccess());
       alert("게시글이 등록되었습니다.");
     }
     catch(error) {
       dispatch(getError(true));
+      console.log(error)
       alert("네트워크 오류로 글을 작성하지 못했어요 :(")
     }
     finally {
@@ -89,7 +84,7 @@ export const deletePostDB = (id) => {
   return async function (dispatch, getState){
     try {
       dispatch(getLoading(true));
-      await axios.delete(`http://localhost:4000/posts/${id}`);
+      await axios.delete(`http://3.39.190.102:8080/api/${id}`);
     }
     catch(error) {
       dispatch(getError(true));
@@ -105,7 +100,7 @@ export const putPostDB = ({id, title, imgURL, text}) => {
   return async function (dispatch, getState){
     try {
       dispatch(getLoading(true));
-      await axios.put(`http://localhost:4000/posts/${id}`,{
+      await axios.put(`http://3.39.190.102:8080/api/${id}`,{
         board_title : title,
         board_imgURL : imgURL,
         board_text : text,
