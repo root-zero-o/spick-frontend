@@ -14,7 +14,7 @@ const DELETE_POST_SUCCESS = "post/DELETE_POST_SUCCESS";
 const getPostsSuccess = (payload) => ({
   type : GET_POSTS_SUCCESS, payload
 })
-const getLoading = (payload) => ({
+export const getLoading = (payload) => ({
   type : GET_LOADING, payload
 })
 const getError = (payload) => ({

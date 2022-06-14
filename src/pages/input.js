@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 // import components
 import Header from '../components/Header';
 // import middleware
-import { addPostDB } from "../redux/modules/post";
+import { getPostsDB, addPostDB } from "../redux/modules/post";
 // import FireBase storage
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../shared/firebase";
@@ -52,17 +52,18 @@ const Input = () => {
           text: textInput.current.value
         }))
       }
+      dispatch( getPostsDB())
       navigate('/');
     }
 
   return (
     <StInputWrap>
       <Header/>
-      <StInputBox onSubmit={onAddPostHandler}>
+      <StInputBox>
         <StTitleInput placeholder="Title" ref={titleInput} required/>
         <div style={{display:"flex", width:"770px", height:"400px"}}>
           {fileUploaded ? (
-            <StImg src={fileView}></StImg>) : 
+            <StImg src={fileView}/>) : 
             (<StImgBox><span>No Image :(</span></StImgBox>)}
           <div style={{width:"50%", height:"100%"}}>
             <StLabel htmlFor="file">Choose Image file</StLabel>
@@ -78,7 +79,7 @@ const Input = () => {
               ref={textInput}
               required/>
             <StBtnDiv>
-              <StBtn>작성완료</StBtn>
+              <StBtn onClick={onAddPostHandler}>작성완료</StBtn>
               <Link to={'/'}><StBtn>취소</StBtn></Link>
             </StBtnDiv>
           </div>
@@ -96,7 +97,7 @@ const StInputWrap = styled.div`
   align-items: center;
 `;
 
-export const StInputBox = styled.form`
+export const StInputBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
