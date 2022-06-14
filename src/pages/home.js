@@ -6,6 +6,7 @@ import RankContainer from "../components/RankContainer";
 import CardContainer from "../components/CardContainer";
 
 
+
 export const Home = () => {
   return (
     <StHomeWrap>

@@ -14,7 +14,7 @@ import { __postComment,__editComment } from '../redux/modules/comment';
     const dispatch = useDispatch();
     const text = useRef(null);
     const board_id = useParams().id;
-    const [isUser,setIsUser]=useState(true);
+    const [commenting,setCommenting]=useState(true);
     const [editCheck , setEditCheck]=useState(false);
     
     const edit=()=>{
@@ -48,20 +48,20 @@ import { __postComment,__editComment } from '../redux/modules/comment';
     // user_pic={value.reply_picURL}
     // user_nick={value.reply_nickname}/>
 
-
+    console.log(props);
   return (
     <>
     {props.user_id==loginId?(
     <>
         {editCheck ? 
         (<StCommentBox>
-            <StUserBox><StUserPic/><StUserNick></StUserNick></StUserBox>
-            <StInputBox ref={text}/>
+            <StUserBox><StUserPic src={props.user_pic}/><StUserNick><strong>{props.user_nick}</strong></StUserNick></StUserBox>
+            <StInputBox  ref={text}/*onChange={(event)=>setCommenting(event.target.value)}*//>
             <StButton onClick={()=>{submit(text,board_id)}}>Submit</StButton>
         </StCommentBox>):
         (<StCommentBox>
-            <StUserBox><StUserPic/><StUserNick></StUserNick></StUserBox>
-            <StTextBox/>
+            <StUserBox><StUserPic src={props.user_pic}/><StUserNick><strong>{props.user_nick}</strong></StUserNick></StUserBox>
+            <StTextBox>{props.comment}</StTextBox>
                 <StButtons>
                     <StButton onClick={edit}>Edit</StButton>
                     <StButton onClick={delet}>Delete</StButton>
@@ -70,8 +70,8 @@ import { __postComment,__editComment } from '../redux/modules/comment';
         </>):
         (<>
         <StCommentBox>
-            <StUserBox><StUserPic/><StUserNick></StUserNick></StUserBox>
-            <StTextBox/>
+            <StUserBox><StUserPic src={props.user_pic}/><StUserNick><strong>{props.user_nick}</strong></StUserNick></StUserBox>
+            <StTextBox>{props.comment}</StTextBox>
         </StCommentBox>
         </>)
     }
@@ -108,17 +108,20 @@ const StButtons=styled.div`
 `;
 
 const StUserNick=styled.p`
-    width:6rem;
+    width:5rem;
     height:2rem;
     margin:0 0 0 1rem;
-    background-color: yellow;
+    font-size: 0.8rem;
+    color:#7f98af;
+    text-align: center;
 `;
 
 const StUserPic=styled.img`
-    width:4rem;
-    height: 4rem;
+    width:4.5rem;
+    height: 4.5rem;
     background-color: yellow;
-    margin:0 0 0.5rem 0.7rem;
+    margin:0 0 0.05rem 0.7rem;
+    
 `;
 
 const StUserBox=styled.div`
@@ -127,13 +130,10 @@ const StUserBox=styled.div`
     align-items: center;
     width: 7.5rem;
     height:8rem;
-    margin: 0 0 0 1rem;
-    
-    
+    margin: 2.5rem 0 0 1rem;
 `;
 
 const StInputBox=styled.textarea`
-    
     width:500px;
     height:8rem;
     margin:0 0 0 3rem;
@@ -143,11 +143,13 @@ const StInputBox=styled.textarea`
 
 
 const StTextBox = styled.div`
+    display: flex;
+    align-items: center;
     text-align: center;
     width:500px;
     height:8rem;
     margin:0 0 0 3rem;
-    background-color: yellow;
+   // background-color: 
 `;
 
 const StCommentBox=styled.div`
