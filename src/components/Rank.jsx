@@ -1,11 +1,13 @@
 /* IMPORT */
+import { Translate } from 'aws-sdk';
 import React from 'react'
 import styled from 'styled-components';
 
 // Rank 부분 카드 하나하나를 나타내는 컴포넌트
-const Rank = () => {
+const Rank = (props) => {
+  console.log(props.isLeft)
   return (
-    <StRankWrap>
+    <StRankWrap isLeft={props.isLeft}>
         <StRankCard>
             <StImg></StImg>
             <StText>
@@ -21,12 +23,16 @@ const Rank = () => {
 const StRankWrap = styled.div`
     display: flex;
     align-items: center;
+    width: 900px;
     height: 90%;
     margin: 0px 5px;
+    float: left;
+    transition: transform 0.5s ease-in-out;
+    transform: ${ (props) => `translate(${props.isLeft}px)`};
 `;
 
 const StRankCard = styled.div`
-    width: 200px;
+    width: 230px;
     height: 100%;
     background: rgb(49,81,110);
     background: -moz-linear-gradient(left, rgb(49,81,110) 0%, rgb(63,119,151) 100%);

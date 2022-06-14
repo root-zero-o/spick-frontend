@@ -52,10 +52,10 @@ const Signup = () => {
       <StTitle>New Account</StTitle>
       <StEmail>Profile Photo</StEmail>
       <StPhoto>
-       {/* <div class="filebox">
+       <div class="filebox">
       <label for="ex_file">업로드</label>
       <input type="file" id="ex_file"/>
-      </div>  */}
+      </div> 
       <br/>
       </StPhoto>
       <Box>

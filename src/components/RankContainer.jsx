@@ -1,9 +1,8 @@
 /* IMPORT */
-import React from "react";
+import React, { useState } from "react";
 // import components
 import Rank from "./Rank";
 import styled from "styled-components";
-import {StContainer} from "./StyleG";
 // import images
 import leftArrow from "../images/left-arrow.png";
 import rightArrow from "../images/right-arrow.png";
@@ -11,29 +10,70 @@ import rightArrow from "../images/right-arrow.png";
 // Rank map돌리는 컴포넌트
 
 const RankContainer = () => {
+
+  const [isLeft, setIsLeft] = useState(0);
+
+
+  const onLeftClick = () => {
+    setIsLeft(240)
+    setTimeout(() => {
+      setIsLeft(0)
+    }, 2500)
+  }
+  const onRightClick = () => {
+    setIsLeft(-240)
+    setTimeout(() => {
+      setIsLeft(0)
+    }, 2500)
+  }
+  
+
   return (
-    <StContainer height="250px">
-        <StRankWrap>
-          <StArrow src={leftArrow}></StArrow>
-          <Rank/>
-          <Rank/>
-          <Rank/>
-          <Rank/>
-          <StArrow src={rightArrow}></StArrow>
-        </StRankWrap>
+    <StContainer>
+      <div style={{display: "flex", alignItems:"center"}}>
+        <StArrow src={leftArrow} onClick={onLeftClick}/>
+          <StRankWrap styleName="container">
+            <Rank isLeft={isLeft}/>
+            <Rank isLeft={isLeft}/>
+            <Rank isLeft={isLeft}/>
+            <Rank isLeft={isLeft}/>
+            <Rank isLeft={isLeft}/>
+          </StRankWrap>
+        <StArrow src={rightArrow} onClick={onRightClick}/>
+      </div>
+      <div style={{display: "flex", alignItems:"center"}}>
+        <StDot isLeft={isLeft}/>
+        <StDot isLeft={isLeft}/>
+        <StDot isLeft={isLeft}/>
+      </div>
     </StContainer>
   )
 }
 
 /* STYLED-COMPONENTS */
 
+const StContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 900px;
+  height: 250px;
+  padding: 15px;
+`;
+
 const StRankWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 90%;
-`;
+  width: 710px;
+  height: 230px;
+  background-color: rgba(0,0,0,0.1);
+  overflow: hidden;
+  margin: 0px 10px;
+  padding: 0px 10px;
+  float: left;
+  `;
 
 const StArrow = styled.img`
   height: 30%;
@@ -44,6 +84,23 @@ const StArrow = styled.img`
   &:hover{
     background-color: rgba(255,255,255,0.1);
     cursor: pointer;
+  }
+`;
+
+const StDot = styled.div`
+  width: 10px;
+  height: 10px;
+  margin: 10px 3px;
+  border-radius: 50%;
+  background-color: white;
+  &:first-child{
+    opacity : ${props => props.isLeft === 240 ? "1" : "0.2"};
+  }
+  &:nth-child(2){
+    opacity : ${props => props.isLeft === 0 ? "1" : "0.2"};
+  }
+  &:last-child{
+    opacity : ${props => props.isLeft === -240 ? "1" : "0.2"};
   }
 `;
 

@@ -58,6 +58,7 @@ export const addPostDB = ({title, imgURL, text}) => {
   return async function(dispatch, getState) {
     try {
       dispatch(getLoading(true));
+
       await apis.post({title, imgURL, text});
       dispatch(addPostSuccess());
       alert("게시글이 등록되었습니다.");
