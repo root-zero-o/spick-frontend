@@ -2,11 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useSelector } from 'react-redux/es/exports';
 import { useRef } from 'react';
 import { __signUp, __loadUser, __idCheck, __nickCheck } from '../redux/modules/user';
 import "./signup.css";
-
+import { storage } from "../shared/firebase";
 
 
 const Signup = () => {
@@ -18,31 +20,63 @@ const Signup = () => {
   const password = useRef(null);
   const passwordCheck = useRef(null);
 
+  const [fileView, setFileView] = useState("");
+  const [fileUploaded, setFileUploaded] = useState(false);
+  const [fileURL, setFileURL] = useState("");
+
+  // 로그인 페이지로 가기
   const moveLog=()=>{
     navigate("/login");
   }
 
+  // 회원가입 입력 정보 보내기
   const submit=()=>{
     dispatch(__signUp({
       username : user_email.current.value,
       password : password.current.value,
       nickname : user_nickname.current.value,
       passwordCheck : passwordCheck.current.value,
+      user_picURL : fileURL,
     }))
     navigate("/");
   }
 
+  // 이메일 체크
   const emailCheck=()=>{
     dispatch(__idCheck({
       username : user_email.current.value,
     }))
   }
 
+  // 닉네임 체크
   const nickCheck=()=>{
     dispatch(__nickCheck({
       nickname : user_nickname.current.value,
     }))
   }
+
+  // 이미지 업로드 onchange event
+  const saveFileImage = (event) => {
+    setFileView(window.URL.createObjectURL(event.target.files[0]));
+    setFileUploaded(true);
+    dispatch(uploadImgFB(event))
+    window.URL.revokeObjectURL(fileView);
+  }
+
+
+  // 이미지 FB에 업로드하는 미들웨어
+  const uploadImgFB = (event) => {
+    return async function (dispatch){
+      const uploaded_file = await uploadBytes(
+        ref(storage, `images/${event.target.files[0].name}/`),
+        event.target.files[0]
+      );
+      const file_url = await getDownloadURL(uploaded_file.ref);
+      setFileURL(file_url);
+    }
+  }
+
+
   return (
    <StBack>
     <StSignBox>
@@ -51,30 +85,38 @@ const Signup = () => {
     <StInBox>
       <StTitle>New Account</StTitle>
       <StEmail>Profile Photo</StEmail>
-      <StPhoto>
-       <div class="filebox">
-      <label for="ex_file">업로드</label>
-      <input type="file" id="ex_file"/>
-      </div> 
+      <StPhotoBox>
+      {fileUploaded ? (
+            <StImg src={fileView}></StImg>) : 
+            (<StImgBox><span>No Image :(</span></StImgBox>)}
+            <StLabel htmlFor="file">Profile Photo</StLabel>
+            </StPhotoBox>
+      <input 
+              type="file" 
+              id="file" 
+              accept="image/*" 
+              style={{display:"none"}}
+              onChange={saveFileImage}
+              required/>
       <br/>
-      </StPhoto>
+      
       <Box>
         <StEmail>Email Adress</StEmail>
         <CheckBox>
-          <StInput placeholder='aaa@gmail.aaa' ref={user_email}/>
+          <StInput placeholder='이메일 형식으로 입력해주세요' type="email" ref={user_email}/>
           <IdCheckButton onClick={emailCheck}>Email Check</IdCheckButton>
         </CheckBox>
       </Box>
       <Box>
           <StEmail>SPICK Account name</StEmail>
           <CheckBox>
-            <StInput placeholder='Luke' ref={user_nickname}/>
+            <StInput placeholder='6자 이하의 문자로 입력해주세요' max="6" ref={user_nickname}/>
             <IdCheckButton onClick={nickCheck}>Nick Check</IdCheckButton>
           </CheckBox>      
       </Box>
       <Box>
         <StEmail>Password</StEmail>
-        <StInput type="password" ref={password}/>
+        <StInput type="password" ref={password} placeholder="소문자,숫자,특수문자를 포함한 8자 이상으로 입력해주세요"/>
       </Box>
       <Box>
         <StEmail>Password Check</StEmail>
@@ -88,6 +130,47 @@ const Signup = () => {
    </StBack>
   )
 }
+
+const StPhotoBox=styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const StLabel = styled.label`
+  display: block;
+  background: rgb(79,200,47);
+  width: 10rem;
+  height : 1rem;
+  margin:0 0 0 1rem;
+  padding: 10px;
+  background: linear-gradient(135deg, rgba(79,200,47,1) 0%, rgba(25,177,78,1) 79%);
+  color: white;
+  text-align: center;
+  &:hover{
+    background: #53d432;
+    cursor: pointer;
+  }
+`;
+
+ const StImg = styled.img`
+  width: 5rem; 
+  height: 5rem;
+  margin : 0 0 0 4rem;
+`;
+
+const StImgBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:0 0 0 4rem;
+  width: 5rem;
+  height: 5rem;
+  background-color: #142231;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+`;
+
 
 const CheckBox=styled.div`
 display: flex;
@@ -120,9 +203,7 @@ background: linear-gradient(to right, #47BFFF 0%, #3EA8F3 50%, #3287E3 100%);
 cursor: pointer;
 `;
 
-const StPhoto = styled.div`
-margin: 0 0 0 10%;
-`;
+
 const StSubmit = styled.button`
   width:10rem;
   height:2rem;
@@ -143,6 +224,7 @@ background: linear-gradient(to right, #47BFFF 0%, #3EA8F3 50%, #3287E3 100%);
 }
 cursor: pointer;
 `;
+
 const StCancel = styled.button`
   width:10rem;
   height:2rem;
@@ -171,6 +253,7 @@ const StInput = styled.input`
   background-color: #32353C;
   border:none;
   color:white;
+  font-size: 12px;
 `;
 const StEmail = styled.div`
   margin:0 0 0 10%;

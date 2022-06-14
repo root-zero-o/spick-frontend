@@ -35,6 +35,15 @@
       "user_picURL": "https://avatars.githubusercontent.com/u/97326130?v=4",
       "like": 3,
       "id": 4
+    },
+    {
+      "board_title": "asdf",
+      "board_imgURL": "https://firebasestorage.googleapis.com/v0/b/chimstagram-7cc2b.appspot.com/o/images%2F%EC%8A%A4%ED%8C%80%EC%83%81%EC%A0%90.png?alt=media&token=d6ae2874-49bb-4a20-813e-89d44aa55862",
+      "board_text": "aaaa",
+      "nickname": "근영",
+      "user_picURL": "https://avatars.githubusercontent.com/u/97326130?v=4",
+      "like": 3,
+      "id": 5
     }
   ]
 }
