@@ -30,8 +30,7 @@ const DetailBox = () => {
   },[dispatch, postId, postList])
 
   const onDeletePostHandler = () => {
-    console.log(postId)
-    dispatch(deletePostDB(postId));
+    dispatch(deletePostDB(post?.board_id));
     dispatch(deleteImgFB(post?.board_imgURL))
     alert("게시글이 삭제되었습니다.");
     navigate('/');
@@ -49,7 +48,7 @@ const DetailBox = () => {
               <div style={{display:"flex", alignItems:"center", justifyContent:"center",width:"200px"}}>좋아요 {post?.like}개</div>
             </StLikeBox>
             <StUserBox>
-              <StUserImg src={post?.user_picURL}></StUserImg>
+              <StUserImg src={post?.user_pic}></StUserImg>
               <span style={{fontWeight:"bold"}}>{post?.nickname}</span>
             </StUserBox>
             <div style={{height:"90%"}}>

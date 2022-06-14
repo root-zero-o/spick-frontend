@@ -27,7 +27,7 @@ const EditBox = () => {
     const postList = useSelector(state => state.post.list)
 
     useEffect(() => {
-        const post = postList.find(value => postId === String(value.id));
+        const post = postList.find(value => postId === String(value.board_id));
         if(post){
             setPost(post)
         }   

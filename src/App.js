@@ -13,6 +13,7 @@ import Detail from './pages/detail';
 
 
 function App() {
+  
   return (
     <Routes>
       <Route path = "/" element={<Home/>}/>

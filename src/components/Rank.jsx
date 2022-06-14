@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 // Rank 부분 카드 하나하나를 나타내는 컴포넌트
 const Rank = (props) => {
-  console.log(props.isLeft)
   return (
     <StRankWrap isLeft={props.isLeft}>
         <StRankCard>

@@ -9,6 +9,7 @@ import { getPostsDB, addPostDB } from "../redux/modules/post";
 // import FireBase storage
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../shared/firebase";
+import { getCookie }   from '../Cookie';
 
 const Input = () => {
 
@@ -17,6 +18,10 @@ const Input = () => {
 
   const titleInput = useRef(null);
   const textInput = useRef(null);
+
+  // cookie info
+  const user_picURL = getCookie("user_pic");
+  const nickname = getCookie("user_nick");
 
   // local state
   const [fileView, setFileView] = useState("");
@@ -49,7 +54,9 @@ const Input = () => {
         dispatch(addPostDB({
           title : titleInput.current.value,
           imgURL : fileURL,
-          text: textInput.current.value
+          text: textInput.current.value,
+          nickname : nickname,
+          user_picURL: user_picURL
         }))
       }
       dispatch( getPostsDB())

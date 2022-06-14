@@ -18,7 +18,6 @@ const CardContainer = () => {
   },[])
 
   const postList = useSelector(state => state.post.list);
-
   return (
     <StContainer>
         {postList.map((value, index) => {
@@ -28,7 +27,7 @@ const CardContainer = () => {
             board_title={value.board_title}
             board_imgURL={value.board_imgURL}
             nickname={value.nickname}
-            user_picURL={value.user_picURL}
+            user_picURL={value.user_pic}
             like={value.like}/>
         })}
     </StContainer>

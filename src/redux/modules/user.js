@@ -135,7 +135,7 @@ export const __login=(payload)=>{
    setCookie("token",accessToken);
    setCookie("user_id",login.headers.username);
    setCookie("user_nick",login.headers.nickname);
-   setCookie("user_pic",login.headers.userPic);
+   setCookie("user_pic",login.headers.user_picurl);
    dispatch(reqSucess(true));
    alert("Hello!!");
     }catch(error){

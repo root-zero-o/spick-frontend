@@ -54,12 +54,11 @@ export const getPostsDB = () => {
   }
 }
 
-export const addPostDB = ({title, imgURL, text}) => {
+export const addPostDB = ({title, imgURL, text, nickname, user_picURL}) => {
   return async function(dispatch, getState) {
     try {
       dispatch(getLoading(true));
-
-      await apis.post({title, imgURL, text});
+      await apis.post({title, imgURL, text, nickname, user_picURL});
       dispatch(addPostSuccess());
       alert("게시글이 등록되었습니다.");
     }
@@ -85,7 +84,6 @@ export const deletePostDB = (id) => {
   return async function (dispatch, getState){
     try {
       dispatch(getLoading(true));
-      console.log(id)
       await apis.deletePost(id);
     }
     catch(error) {
@@ -103,15 +101,7 @@ export const putPostDB = ({id, title, imgURL, text}) => {
   return async function (dispatch, getState){
     try {
       dispatch(getLoading(true));
-      await axios.put(`http://3.39.190.102:8080/api/${id}`,{
-        board_title : title,
-        board_imgURL : imgURL,
-        board_text : text,
-        // 이 부분은 URL 받으면 변경
-        nickname: "근영",
-        user_picURL: "https://avatars.githubusercontent.com/u/97326130?v=4",
-        like: 3
-      })
+      await apis.putPost({id, title, imgURL, text});
     }
     catch {
       dispatch(getError(true));
