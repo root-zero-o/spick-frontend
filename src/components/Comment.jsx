@@ -56,7 +56,7 @@ import { __postComment,__editComment } from '../redux/modules/comment';
         {editCheck ? 
         (<StCommentBox>
             <StUserBox><StUserPic src={props.user_pic}/><StUserNick><strong>{props.user_nick}</strong></StUserNick></StUserBox>
-            <StInputBox  ref={text}/*onChange={(event)=>setCommenting(event.target.value)}*//>
+            <StInputBox type="text" value={props.comment} ref={text}/*onChange={(event)=>setCommenting(event.target.value)}*//>
             <StButton onClick={()=>{submit(text,board_id)}}>Submit</StButton>
         </StCommentBox>):
         (<StCommentBox>
@@ -133,7 +133,7 @@ const StUserBox=styled.div`
     margin: 2.5rem 0 0 1rem;
 `;
 
-const StInputBox=styled.textarea`
+const StInputBox=styled.input`
     width:500px;
     height:8rem;
     margin:0 0 0 3rem;

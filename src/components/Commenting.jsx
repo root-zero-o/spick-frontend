@@ -10,6 +10,9 @@ const Commenting = () => {
     const dispatch=useDispatch();
     const reply_text=useRef(null);
 
+    const user_nick = getCookie("user_nick");
+    const user_pic = getCookie("user_pic");
+    const user_id = getCookie("user_id");
     const submit=(event)=>{
         event.preventDefault();
         dispatch(__postComment({
@@ -22,61 +25,60 @@ const Commenting = () => {
 
 
   return (
-    <CommentBox>
+    <StCommentBox>
         
-        <Title> Company of Heroes2 제품에 대한 평가 작성</Title>
-        <Body>
-            <UserBox>
-                <UserPic/>
-                <UserNick></UserNick>
-            </UserBox>
-            <InputBox ref={reply_text}/>
-            <SubmitButton onClick={submit}>Submit</SubmitButton>
-        </Body>
-    </CommentBox>
+        <StTitle> Company of Heroes2 제품에 대한 평가 작성</StTitle>
+        <StBody>
+            <StUserBox>
+                <StUserPic src={user_pic}/>
+                <StUserNick>{user_nick}</StUserNick>
+            </StUserBox>
+            <StInputBox ref={reply_text}/>
+            <StSubmitButton onClick={submit}>Submit</StSubmitButton>
+        </StBody>
+    </StCommentBox>
   )
 }
 
+const StUserNick=styled.p`
+    width:5rem;
+    height:2rem;
+    margin:0 0 0 1rem;
+    font-size: 0.8rem;
+    color:#7f98af;
+    text-align: center;
+`;
 
-const Title =styled.div`
+const StUserPic=styled.img`
+    width:4.5rem;
+    height: 4.5rem;
+    background-color: yellow;
+    margin:0 0 0.05rem 0.7rem;
+`;
+
+const StTitle =styled.div`
 width: 100%;
 font-size: 1.2rem;
 color:#57beed;
 `;
 
-const Body =styled.div`
+const StBody =styled.div`
 height: 10rem;
 display: flex;
 align-items: center;
 `;
 
-const UserNick=styled.p`
-    width:6rem;
-    height:2rem;
-    margin:0 0 0 1rem;
-    background-color: yellow;
-`;
 
-const UserPic=styled.img`
-    width:4rem;
-    height: 4rem;
-    background-color: yellow;
-    margin:0 0 0.5rem 0.7rem;
-`;
-
-
-const UserBox=styled.div`
+const StUserBox=styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 7.5rem;
     height:8rem;
-    margin: 0 0 0 1rem;
-    
-    
+    margin: 2.5rem 1.5rem 0 1rem;
 `;
 
-const SubmitButton = styled.button`
+const StSubmitButton = styled.button`
     width:5rem;
     height:2rem;
     margin:0 1rem 0 1rem;
@@ -94,7 +96,7 @@ background: linear-gradient(to right, #66BFF2 0%, #549EC9 50%, #417A9B 100%);
     cursor: pointer;
 `;
 
-const InputBox = styled.textarea`
+const StInputBox = styled.textarea`
     width:500px;
     height:7rem;
     padding: 0.5rem;
@@ -103,7 +105,7 @@ const InputBox = styled.textarea`
     color:white;
 `;
 
-const CommentBox=styled.div`
+const StCommentBox=styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
