@@ -16,20 +16,21 @@ const DetailBox = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const postId = useParams().id;
+  const postId = Number(useParams().board_id);
 
   const [post, setPost] = useState(undefined);
 
   const postList = useSelector(state => state.post.list)
 
   useEffect(() => {
-    const post = postList.find(value => postId === String(value.id));
+    const post = postList.find(value => postId === value.board_id);
     if(post){
       setPost(post)
     }
   },[dispatch, postId, postList])
 
   const onDeletePostHandler = () => {
+    console.log(postId)
     dispatch(deletePostDB(postId));
     dispatch(deleteImgFB(post?.board_imgURL))
     alert("게시글이 삭제되었습니다.");

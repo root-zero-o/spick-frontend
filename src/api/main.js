@@ -6,7 +6,8 @@ const apis = {
         board_title : title,
         board_imgURL : imgURL,
         board_text : text
-    })
+    }),
+    deletePost : (id) => api.delete(`/api/${id}`)
 }
 
 export default apis;

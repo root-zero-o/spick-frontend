@@ -24,7 +24,7 @@ const CardContainer = () => {
         {postList.map((value, index) => {
           return <Card
             key={index}
-            id={value.id}
+            id={value.board_id}
             board_title={value.board_title}
             board_imgURL={value.board_imgURL}
             nickname={value.nickname}
