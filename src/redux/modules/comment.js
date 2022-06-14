@@ -1,11 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 
-
-
 const initialState={
   commentList:[],
-  
 }
 
 const SERVER_REQ="user/SERVER_REQ"  // loading check
@@ -70,11 +67,12 @@ export const __postComment=(payload)=>{
 
 
 export const __getComment=()=>{
+  
   return async function(dispatch,getState){
     try{
       dispatch(serverReq(true));
       const {data} = await axios.get("http://localhost:5000/posts");
-      dispatch(Load(data));
+      dispatch(Load({data}));
       }
       catch(error){
         dispatch(reqError(true));
@@ -111,12 +109,13 @@ export const __editComment=(payload)=>{
     try{
       const editComment= await axios({
         method:"put",
-        url:"",
+        url:"http://localhost:5000/posts",
         data:{
           reply_id: payload.reply_id,
           reply_nickname: payload.reply_nickname,
           reply_picURL: payload.reply_picURL,
           reply_text: payload.reply_text,
+          board_id:payload.board_id,
         }
       })
     }
@@ -134,7 +133,7 @@ function comment(state=initialState,action){
   switch(action.type)
   {
     case ADD: return{...state,comment:[...state.comment]};
-    case LOAD: return{...state,comment:action.payload};
+    case LOAD: return{...state,commentList:action.payload};
     case EDIT: return{};
     case DELETE: return{};
     case REQ_SUCCESS:{
