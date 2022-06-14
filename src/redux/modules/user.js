@@ -41,7 +41,6 @@ export function NickCheck(payload){
 }
 
 export const __idCheck = (payload)=>{
-  console.log(payload)
   return async function(dispatch,getState){
     dispatch(serverReq(true))
     try{
@@ -52,7 +51,6 @@ export const __idCheck = (payload)=>{
           username:payload.username,
         }
       });
-      console.log(idcheck.data);
       // dispatch(IdCheck(idcheck.headers.Username));
       {(idcheck.data)?
       (alert("You can use this email!")):(alert("Already Existing Email!!!!"))}
@@ -68,7 +66,7 @@ export const __idCheck = (payload)=>{
 }
 
 export const __nickCheck = (payload)=>{
-  console.log(payload)
+
   return async function(dispatch,getState){
     try{
     const nickcheck = await axios({
@@ -78,9 +76,8 @@ export const __nickCheck = (payload)=>{
         nickname:payload.nickname,
       }
     });
-    console.log(nickcheck.data)
     {(nickcheck.data)?
-    (alert("You can use this email!")):(alert("Already Existing Email!!!!"))}
+    (alert("You can use this email!")):(alert("Already Existing Nickname!!!!"))}
   }
   catch(error){
     dispatch(reqError(true));
@@ -93,11 +90,11 @@ export const __nickCheck = (payload)=>{
 }
 
 export const __signUp=(payload)=>{
-  console.log(payload)
   return async function(dispatch,getState){
     // dispatch()
     dispatch(serverReq(true));
     try{
+      console.log(payload);
       const signup = await axios({
         method:"post",
         url : "http://3.39.190.102:8080/api/signup",
@@ -106,8 +103,11 @@ export const __signUp=(payload)=>{
           password : payload.password,
           nickname : payload.nickname,
           passwordCheck : payload.passwordCheck,
+          user_picURL : payload.user_picURL
+
         }
        })
+
     }catch(error){
       console.log(error);
       dispatch(reqError(true));
@@ -119,7 +119,6 @@ export const __signUp=(payload)=>{
 }
 
 export const __login=(payload)=>{
-  console.log(payload)
   return async function(dispatch,getState){
     try{
       dispatch(serverReq(true));
@@ -131,7 +130,7 @@ export const __login=(payload)=>{
       password:payload.password,
     }
    })
-   console.log(login)
+
    const accessToken=login.headers.authorization;
    setCookie("token",accessToken);
    setCookie("user_id",login.headers.username);
