@@ -12,7 +12,7 @@ import { getPostsDB } from "../redux/modules/post";
 const CardContainer = () => {
 
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(getPostsDB())
   },[])

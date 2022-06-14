@@ -1,24 +1,81 @@
 /* IMPORT */
-import React from 'react'
+import React, { useState } from 'react'
+import { useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components'
+import { getCookie } from '../Cookie';
+import { __postComment,__editComment } from '../redux/modules/comment';
 
 // 댓글 박스 하나 나타내는 컴포넌트!
 
- const Comment = () => {
-    const islogin = true;
-
-  return (
-    <StCommentBox>
-    <StUserBox><StUserPic/><StUserNick></StUserNick></StUserBox>
-    <StTextBox/>
-    {islogin?
-    (<StButtons>
-        <StButton>Edit</StButton>
-        <StButton>Delete</StButton>
-    </StButtons>):
-    <></>}
-    </StCommentBox>
+ const Comment = (props) => {
+    const loginId = getCookie("user_id");
+    const dispatch = useDispatch();
+    const text = useRef(null);
+    const board_id = useParams().id;
+    const [commenting,setCommenting]=useState(true);
+    const [editCheck , setEditCheck]=useState(false);
     
+    const edit=()=>{
+        setEditCheck(true);
+        dispatch(__editComment({
+            reply_id:props.user_id,
+            reply_nickname:props.user_nick,
+            reply_picURL:props.user_pic,
+            reply_text:text,
+            board_id:board_id,
+        }))
+    }
+    
+    const delet=()=>{
+        
+    }
+
+    const submit=(text,board_id)=>{
+        dispatch(__postComment({
+            reply_id:props.user_id,
+            reply_nickname:props.user_nick,
+            reply_picURL:props.user_pic,
+            reply_text:text,
+            board_id:board_id,
+        }))
+    }
+    // key = {index}
+    // id={value.id} 
+    // comment={value.reply_text} 
+    // user_id={value.reply_id} 
+    // user_pic={value.reply_picURL}
+    // user_nick={value.reply_nickname}/>
+
+    console.log(props);
+  return (
+    <>
+    {props.user_id==loginId?(
+    <>
+        {editCheck ? 
+        (<StCommentBox>
+            <StUserBox><StUserPic src={props.user_pic}/><StUserNick><strong>{props.user_nick}</strong></StUserNick></StUserBox>
+            <StInputBox  ref={text}/*onChange={(event)=>setCommenting(event.target.value)}*//>
+            <StButton onClick={()=>{submit(text,board_id)}}>Submit</StButton>
+        </StCommentBox>):
+        (<StCommentBox>
+            <StUserBox><StUserPic src={props.user_pic}/><StUserNick><strong>{props.user_nick}</strong></StUserNick></StUserBox>
+            <StTextBox>{props.comment}</StTextBox>
+                <StButtons>
+                    <StButton onClick={edit}>Edit</StButton>
+                    <StButton onClick={delet}>Delete</StButton>
+                </StButtons>
+        </StCommentBox>)}
+        </>):
+        (<>
+        <StCommentBox>
+            <StUserBox><StUserPic src={props.user_pic}/><StUserNick><strong>{props.user_nick}</strong></StUserNick></StUserBox>
+            <StTextBox>{props.comment}</StTextBox>
+        </StCommentBox>
+        </>)
+    }
+    </>
   )
 }
 
@@ -51,17 +108,20 @@ const StButtons=styled.div`
 `;
 
 const StUserNick=styled.p`
-    width:6rem;
+    width:5rem;
     height:2rem;
     margin:0 0 0 1rem;
-    background-color: yellow;
+    font-size: 0.8rem;
+    color:#7f98af;
+    text-align: center;
 `;
 
 const StUserPic=styled.img`
-    width:4rem;
-    height: 4rem;
+    width:4.5rem;
+    height: 4.5rem;
     background-color: yellow;
-    margin:0 0 0.5rem 0.7rem;
+    margin:0 0 0.05rem 0.7rem;
+    
 `;
 
 const StUserBox=styled.div`
@@ -70,17 +130,26 @@ const StUserBox=styled.div`
     align-items: center;
     width: 7.5rem;
     height:8rem;
-    margin: 0 0 0 1rem;
-    
-    
+    margin: 2.5rem 0 0 1rem;
 `;
 
+const StInputBox=styled.textarea`
+    width:500px;
+    height:8rem;
+    margin:0 0 0 3rem;
+    background-color: tomato;
+    color: white;
+`;
+
+
 const StTextBox = styled.div`
+    display: flex;
+    align-items: center;
     text-align: center;
     width:500px;
     height:8rem;
     margin:0 0 0 3rem;
-    background-color: yellow;
+   // background-color: 
 `;
 
 const StCommentBox=styled.div`

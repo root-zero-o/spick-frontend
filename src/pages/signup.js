@@ -4,8 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux/es/exports';
 import { useRef } from 'react';
-import { __signUp, __loadUser, __idCheck } from '../redux/modules/user';
+import { __signUp, __loadUser, __idCheck, __nickCheck } from '../redux/modules/user';
 import "./signup.css";
+
+
+
 const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -14,9 +17,6 @@ const Signup = () => {
   const user_nickname = useRef(null);
   const password = useRef(null);
   const passwordCheck = useRef(null);
-  const idcheck = useSelector(state=>state.user.idcheck);
-  const nickcheck = useSelector(state=>state.user.nickcheck);
-
 
   const moveLog=()=>{
     navigate("/login");
@@ -39,12 +39,10 @@ const Signup = () => {
   }
 
   const nickCheck=()=>{
-    dispatch(__idCheck({
-      username : user_nickname.current.value,
+    dispatch(__nickCheck({
+      nickname : user_nickname.current.value,
     }))
   }
-
-
   return (
    <StBack>
     <StSignBox>
@@ -54,21 +52,21 @@ const Signup = () => {
       <StTitle>New Account</StTitle>
       <StEmail>Profile Photo</StEmail>
       <StPhoto>
-      {/* <div class="filebox">
+       {/* <div class="filebox">
       <label for="ex_file">업로드</label>
       <input type="file" id="ex_file"/>
-      </div> */}
+      </div>  */}
       <br/>
       </StPhoto>
       <Box>
         <StEmail>Email Adress</StEmail>
         <CheckBox>
-          <StInput placeholder='aaa@aaa.aaa' ref={user_email}/>
+          <StInput placeholder='aaa@gmail.aaa' ref={user_email}/>
           <IdCheckButton onClick={emailCheck}>Email Check</IdCheckButton>
         </CheckBox>
       </Box>
       <Box>
-          <StEmail>Steam Account name</StEmail>
+          <StEmail>SPICK Account name</StEmail>
           <CheckBox>
             <StInput placeholder='Luke' ref={user_nickname}/>
             <IdCheckButton onClick={nickCheck}>Nick Check</IdCheckButton>

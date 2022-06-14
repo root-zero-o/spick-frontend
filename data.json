@@ -19,13 +19,22 @@
       "like": 1
     },
     {
-      "board_title": "321",
-      "board_imgURL": "https://firebasestorage.googleapis.com/v0/b/chimstagram-7cc2b.appspot.com/o/images%2F%EA%B2%8C%EB%A1%A4%ED%8A%B8.png?alt=media&token=b7aa7b3f-f864-4d02-afa4-37665467dc7d",
-      "board_text": "321",
+      "board_title": "수정했어요",
+      "board_imgURL": "https://firebasestorage.googleapis.com/v0/b/chimstagram-7cc2b.appspot.com/o/images%2FKakaoTalk_20220518_153908682.jpg?alt=media&token=ec23b0f9-b1ef-4029-b332-2a544c475674",
+      "board_text": "수정했어요!",
       "nickname": "근영",
       "user_picURL": "https://avatars.githubusercontent.com/u/97326130?v=4",
       "like": 3,
       "id": 3
+    },
+    {
+      "board_title": "테니스 왕자",
+      "board_imgURL": "https://firebasestorage.googleapis.com/v0/b/chimstagram-7cc2b.appspot.com/o/images%2FKakaoTalk_20210621_121857359_03.jpg?alt=media&token=7ce389fb-e58e-4ec8-9675-ef8a33fbca4b",
+      "board_text": "짱멋짐",
+      "nickname": "근영",
+      "user_picURL": "https://avatars.githubusercontent.com/u/97326130?v=4",
+      "like": 3,
+      "id": 4
     }
   ]
 }
