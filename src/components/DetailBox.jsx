@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 // import Image
 import likeLogo from "../images/likeLogo.png";
 // import middleware
-import { deletePostDB } from "../redux/modules/post";
+import { deletePostDB, deleteImgFB } from "../redux/modules/post";
 
 
 // detail 페이지에서 해당 게시글 정보가 담기는 컴포넌트
@@ -31,6 +31,7 @@ const DetailBox = () => {
 
   const onDeletePostHandler = () => {
     dispatch(deletePostDB(postId));
+    dispatch(deleteImgFB(post?.board_imgURL))
     alert("게시글이 삭제되었습니다.");
     navigate('/');
   }

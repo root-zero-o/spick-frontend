@@ -19,13 +19,13 @@
       "like": 1
     },
     {
+      "board_title": "수정했어요",
+      "board_imgURL": "https://firebasestorage.googleapis.com/v0/b/chimstagram-7cc2b.appspot.com/o/images%2F%EA%B2%8C%EB%A1%A4%ED%8A%B8.png?alt=media&token=feb164c8-fd65-47bb-b087-e80b99350466",
+      "board_text": "수정했어요!",
+      "nickname": "근영",
+      "user_picURL": "https://avatars.githubusercontent.com/u/97326130?v=4",
+      "like": 3,
       "id": 3
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 5
     }
   ]
 }
