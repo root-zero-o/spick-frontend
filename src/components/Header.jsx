@@ -8,7 +8,7 @@ import logo from "../images/logo.png";
 import { Link } from 'react-router-dom';
 
 // 헤더
-const Header = () => {
+const Header = ({isLogin}) => {
 
   return (
     <StHeaderWrapper>
@@ -19,9 +19,18 @@ const Header = () => {
             </StLogoDiv>
         </StLink>
         <StLogInDiv>
-            <Link to={'/login'}><StBtn>로그인</StBtn></Link>
-            <Link to={'/signup'}><StBtn>회원가입</StBtn></Link>
-            <Link to={'/input'}><StBtn>글쓰기</StBtn></Link>
+            { isLogin ? (
+                <>
+                    <Link to={'/input'}><StBtn>글쓰기</StBtn></Link>
+                    <StBtn>로그아웃</StBtn>
+                </>
+            ) : (
+                <>
+                    <Link to={'/login'}><StBtn>로그인</StBtn></Link>
+                    <Link to={'/signup'}><StBtn>회원가입</StBtn></Link>
+                </>
+            )}
+            
             <StSearchInput placeholder="검색하기"/>
             <StSearchBtn>🔍</StSearchBtn>
         </StLogInDiv>
