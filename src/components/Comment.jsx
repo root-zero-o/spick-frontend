@@ -114,6 +114,7 @@ const StUserNick=styled.p`
     font-size: 0.8rem;
     color:#7f98af;
     text-align: center;
+    font-weight: 10rem;
 `;
 
 const StUserPic=styled.img`
@@ -130,7 +131,7 @@ const StUserBox=styled.div`
     align-items: center;
     width: 7.5rem;
     height:8rem;
-    margin: 2.5rem 0 0 1rem;
+    margin: 3.5rem 0 0 1rem;
 `;
 
 const StInputBox=styled.input`
@@ -156,8 +157,8 @@ const StCommentBox=styled.div`
     display: flex;
     align-items: center;
     width: 800px;
-    height: 10rem;
-    margin: 10px 0px;
+    height: 8rem;
+    margin: 1rem 0 0 0;
     background-color: rgba(39,65,86,255);
     border-top: 2px solid #264357;
 `;

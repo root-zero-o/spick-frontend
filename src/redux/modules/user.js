@@ -77,7 +77,7 @@ export const __nickCheck = (payload)=>{
       }
     });
     {(nickcheck.data)?
-    (alert("You can use this email!")):(alert("Already Existing Nickname!!!!"))}
+    (alert("You can use this Nickname!!")):(alert("Already Existing Nickname!!!!"))}
   }
   catch(error){
     dispatch(reqError(true));
@@ -120,6 +120,7 @@ export const __signUp=(payload)=>{
 
 export const __login=(payload)=>{
   return async function(dispatch,getState){
+    
     try{
       dispatch(serverReq(true));
    const login = await axios({
@@ -137,6 +138,7 @@ export const __login=(payload)=>{
    setCookie("user_nick",login.headers.nickname);
    setCookie("user_pic",login.headers.user_picurl);
    dispatch(reqSucess(true));
+   console.log(login);
    alert("Hello!!");
     }catch(error){
       console.log(error);
