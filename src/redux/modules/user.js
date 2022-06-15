@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react'
 import { setCookie , getCookie, removeCookie} from '../../Cookie';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const initialState = {
   list:[],
@@ -95,6 +96,7 @@ export const __nickCheck = (payload)=>{
 }
 
 export const __signUp=(payload)=>{
+  
   return async function(dispatch,getState){
     // dispatch()
     dispatch(serverReq(true));
@@ -124,7 +126,6 @@ export const __signUp=(payload)=>{
 
 export const __login=(payload)=>{
   return async function(dispatch,getState){
-    
     try{
       dispatch(serverReq(true));
    const login = await axios({
@@ -135,18 +136,20 @@ export const __login=(payload)=>{
       password:payload.password,
     }
    })
-
    const accessToken=login.headers.authorization;
+  
+    alert("hello");
    setCookie("token",accessToken);
    setCookie("user_id",login.headers.username);
    setCookie("user_nick",login.headers.nickname);
    setCookie("user_pic",login.headers.user_picurl);
    dispatch(reqSucess(true));
-   dispatch(__IsLogin())
-    }catch(error){
+   dispatch(__IsLogin());
+  
+  }catch(error){
       console.log(error);
       dispatch(reqError(true));
-      //alert("Check your ID and Password");
+      alert("Check your ID and Password");
     }finally{
       dispatch(serverReq(false));
     }
