@@ -10,6 +10,8 @@ import likeLogo from "../images/likeLogo.png";
 // import middleware
 import { deletePostDB, deleteImgFB } from "../redux/modules/post";
 import { getCookie } from '../Cookie';
+// import Hook
+import { useGetPosts } from '../Hooks/useGetPosts';
 
 
 // detail 페이지에서 해당 게시글 정보가 담기는 컴포넌트
@@ -18,17 +20,10 @@ const DetailBox = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const postId = Number(useParams().board_id);
- 
-  const [post, setPost] = useState(undefined);
 
-  const postList = useSelector(state => state.post.list)
+  const { data } = useGetPosts();
 
-  useEffect(() => {
-    const post = postList.find(value => postId === value.board_id);
-    if(post){
-      setPost(post)
-    }
-  },[dispatch, postId, postList])
+  const post = data.find(value => postId === value.board_id);
 
   const onDeletePostHandler = () => {
     dispatch(deletePostDB(post?.board_id));
@@ -52,7 +47,7 @@ const DetailBox = () => {
               <div style={{display:"flex", alignItems:"center", justifyContent:"center",width:"200px"}}>좋아요 {post?.like}개</div>
             </StLikeBox>
             <StUserBox>
-              <StUserImg src={post?.user_pic}></StUserImg>
+              <StUserImg src={post?.user_picURL}></StUserImg>
               <span style={{fontWeight:"bold"}}>{post?.nickname}</span>
             </StUserBox>
             <div style={{height:"90%"}}>
