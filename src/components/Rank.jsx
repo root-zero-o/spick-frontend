@@ -27,6 +27,12 @@ const StRankWrap = styled.div`
     float: left;
     transition: transform 0.5s ease-in-out;
     transform: ${ (props) => `translate(${props.isLeft}px)`};
+    &:hover{
+      width: 910px;
+      height:91%;
+      transform: translateY(-10px);
+      
+    }
 `;
 
 const StRankCard = styled.div`

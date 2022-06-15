@@ -32,7 +32,7 @@ const Header = () => {
 
     // 검색어 입력 버튼 이벤트
     const onSearchHandler = () => {
-        const replacedInput = searchInput.current.value.replace(/ /g,"");
+        const replacedInput = searchInput.current.value;
         console.log(replacedInput)
         dispatch(__search(replacedInput))
     }
@@ -58,7 +58,7 @@ const Header = () => {
                 </>
             )}
             
-            <StSearchInput ref={searchInput}placeholder="검색하기"/>
+            <StSearchInput ref={searchInput}placeholder="Search With Title"/>
             <Link to={'/search'}><StSearchBtn onClick={onSearchHandler}>🔍</StSearchBtn></Link>
         </StLogInDiv>
     </StHeaderWrapper>
@@ -125,9 +125,14 @@ const StBtn = styled.button`
     color: white;
     font-size: 15px;
     border: none;
+    transition: 80ms;
     &:hover{
         background: #307FC0;
         cursor: pointer;
+        transform: translateY(-3px);
+        width: 93px;
+        height: 52px;
+        border: 1px solid white;
     }
 `;
 
