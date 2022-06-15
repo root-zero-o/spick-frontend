@@ -3,7 +3,7 @@ import React from 'react'
 // import components
 import Card from "./Card";
 import { StContainer } from "./StyleG";
-// import axios instance
+// import Hook
 import { useGetPosts } from '../Hooks/useGetPosts';
 
 // home 화면 카드들 map 돌리는 컴포넌트
@@ -11,6 +11,7 @@ import { useGetPosts } from '../Hooks/useGetPosts';
 const CardContainer = () => {
  
   const { data } = useGetPosts();
+  console.log(data)
   return (
     <StContainer>
         {data?.map((value, index) => {
@@ -20,7 +21,7 @@ const CardContainer = () => {
             board_title={value.board_title}
             board_imgURL={value.board_imgURL}
             nickname={value.nickname}
-            user_picURL={value.user_pic}
+            user_picURL={value.user_picURL}
             like={value.like}/>
         })}
     </StContainer>
