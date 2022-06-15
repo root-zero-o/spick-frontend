@@ -8,18 +8,23 @@ import logo from "../images/logo.png";
 // import Router
 import { Link } from 'react-router-dom';
 // import middleware
-import { __IsLogin } from "../redux/modules/user";
+import { __IsLogin, __IsLogout } from "../redux/modules/user";
 
 // 헤더
 const Header = () => {
 
     const dispatch = useDispatch();
 
+    const isLogin = useSelector(state => state.user.isLogin) 
+
     useEffect(() => {
         dispatch(__IsLogin())
-      },[dispatch])
+      },[dispatch, isLogin])
 
-    const isLogin = useSelector(state => state.user.isLogin) 
+    const onLogOutHandler = () => {
+        dispatch(__IsLogout());
+        alert("로그아웃 되었습니다!")
+    }
 
   return (
     <StHeaderWrapper>
@@ -33,7 +38,7 @@ const Header = () => {
             { isLogin ? (
                 <>
                     <Link to={'/input'}><StBtn>글쓰기</StBtn></Link>
-                    <StBtn>로그아웃</StBtn>
+                    <StBtn onClick={onLogOutHandler}>로그아웃</StBtn>
                 </>
             ) : (
                 <>
