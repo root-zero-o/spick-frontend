@@ -23,7 +23,7 @@ const DetailBox = () => {
 
   const { data } = useGetPosts();
 
-  const post = data.find(value => postId === value.board_id);
+  const post = data.find(value => postId === value.board_id.replace(/ /g,""));
 
   const onDeletePostHandler = () => {
     dispatch(deletePostDB(post.board_id));
