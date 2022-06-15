@@ -2,11 +2,11 @@ import React from "react"
 import styled from "styled-components";
 import "../App.css";
 import { Link } from 'react-router-dom';
-
 // import components
 import Header from '../components/Header';
 import RankContainer from "../components/RankContainer";
 import CardContainer from "../components/CardContainer";
+
 
 export const Home = () => {
 
