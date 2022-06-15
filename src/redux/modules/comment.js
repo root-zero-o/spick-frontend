@@ -45,7 +45,7 @@ export const __postComment=(payload)=>{
       dispatch(serverReq(true));
       const postComment = await axios({
         method:"post",
-        url : "http://localhost:5000/posts",
+        url : "http://localhost:4000/posts",
         data : {
           reply_id: payload.reply_id,
           reply_nickname: payload.reply_nickname,
@@ -57,7 +57,7 @@ export const __postComment=(payload)=>{
     } 
     catch(error){
       dispatch(reqError(true));
-      alert("Couldn't Post Your Comment!!")
+      alert("Posting Denied!!!")
     }
     finally{
       dispatch(serverReq(false));
@@ -71,13 +71,13 @@ export const __getComment=()=>{
   return async function(dispatch,getState){
     try{
       dispatch(serverReq(true));
-      const {data} = await axios.get("http://localhost:5000/posts");
+      const {data} = await axios.get("http://localhost:4000/posts");
       dispatch(Load({data}));
       }
       catch(error){
         dispatch(reqError(true));
         console.log(error)
-        alert("Couldn't get CommentList!!")
+        alert("Can't get CommentList!!")
       }
       finally{
         dispatch(serverReq(false));
@@ -90,7 +90,7 @@ export const __deleteComment=(id)=>{
   return async function(dispatch,getState){
     dispatch(serverReq(true))
     try{
-      await axios.delete(`http://localhost:5000/posts/${id}`)
+      await axios.delete(`http://localhost:4000/posts/${id}`)
       alert("Your Comment has been Deleted")
     }
     catch(error){
@@ -109,7 +109,7 @@ export const __editComment=(payload)=>{
     try{
       const editComment= await axios({
         method:"put",
-        url:"http://localhost:5000/posts",
+        url:"http://localhost:4000/posts",
         data:{
           reply_id: payload.reply_id,
           reply_nickname: payload.reply_nickname,

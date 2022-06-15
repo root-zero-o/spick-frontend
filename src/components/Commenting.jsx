@@ -10,19 +10,18 @@ const Commenting = () => {
     const dispatch=useDispatch();
     const reply_text=useRef(null);
 
+    const isToken = getCookie("token");
     const user_nick = getCookie("user_nick");
     const user_pic = getCookie("user_pic");
-    const user_id = getCookie("user_id");
     const submit=(event)=>{
         event.preventDefault();
         dispatch(__postComment({
-            reply_text: reply_text,
+            reply_text: reply_text.current.value,
             reply_id:getCookie("user_id"),
             reply_nickname:getCookie("user_nick"),
             reply_picURL:getCookie("user_pic"),
         }))
     }
-
 
   return (
     <StCommentBox>
@@ -34,7 +33,8 @@ const Commenting = () => {
                 <StUserNick>{user_nick}</StUserNick>
             </StUserBox>
             <StInputBox ref={reply_text}/>
-            <StSubmitButton onClick={submit}>Submit</StSubmitButton>
+            {isToken?<StSubmitButton onClick={submit}>Submit</StSubmitButton>:
+            <StSubmitButton onClick={submit} disabled="disabled">Submit</StSubmitButton>}
         </StBody>
     </StCommentBox>
   )

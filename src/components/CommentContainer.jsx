@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
+import { getCookie } from '../Cookie';
 import { __getComment } from '../redux/modules/comment';
 import Comment from './Comment';
 import Commenting from './Commenting';
@@ -8,17 +9,19 @@ import Commenting from './Commenting';
 const CommentContainer = () => {
 
   const dispatch = useDispatch();
+  const isToken = getCookie("token");
 
   useEffect(()=>{
     dispatch(__getComment())
   },[dispatch])
 
   const commentList = useSelector(state=>state.comment.commentList);
-  console.log(commentList.data)
+  console.log(isToken);
 
   return (
     <>
-        <Commenting/>
+    {getCookie("token")===undefined?<></>:<Commenting/>}
+        
        {
         commentList.data === undefined ? 
          "" :commentList.data.map((value,index)=>{

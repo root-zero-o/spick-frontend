@@ -19,6 +19,8 @@ import {
   QueryClient,
   QueryClientProvider,
 } from 'react-query'
+import AboutUs from './pages/aboutUs';
+
 
 const queryClient = new QueryClient();
 
@@ -35,9 +37,9 @@ function App() {
         <Route path = "/input" element={<Input/>}/>
         <Route path = "/edit/:id" element={<Edit/>}/>
         <Route path = "/detail/:board_id" element={<Detail/>}/>
+        <Route path = "/aboutus" element={<AboutUs/>}/>
       </Routes>
     </QueryClientProvider>
-    
   );
 }
 
