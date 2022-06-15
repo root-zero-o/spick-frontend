@@ -58,7 +58,7 @@ const Header = () => {
                 </>
             )}
             
-            <StSearchInput ref={searchInput}placeholder="검색하기"/>
+            <StSearchInput ref={searchInput}placeholder="Search With Title"/>
             <Link to={'/search'}><StSearchBtn onClick={onSearchHandler}>🔍</StSearchBtn></Link>
         </StLogInDiv>
     </StHeaderWrapper>

@@ -35,7 +35,7 @@ const SearchContainer = () => {
     findWord[i] = findWordArr[i].join("")
   }
 
-  const post = findWord.map( word => data.find(value => word === value.board_title.replace(/ /g,"")))
+  const post = findWord.map( word => data.find(value => word === value.board_title))
   dispatch(__searchNum(post.length));
 
   return (
