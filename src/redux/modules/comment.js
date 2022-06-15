@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from 'axios'
+import { useParams } from 'react-router-dom'
+import apis from '../../api/main'
 
 const initialState={
   commentList:[],
@@ -43,20 +45,13 @@ export const __postComment=(payload)=>{
   return async function(dispatch,getState){
     try{
       dispatch(serverReq(true));
-      const postComment = await axios({
-        method:"post",
-        url : "http://localhost:4000/posts",
-        data : {
-          reply_id: payload.reply_id,
-          reply_nickname: payload.reply_nickname,
-          reply_picURL: payload.reply_picURL,
-          reply_text: payload.reply_text,
-        }
-      })
+      const postComment = await apis.postComment(payload)
       dispatch(Add(postComment))
+      console.log(postComment);
     } 
     catch(error){
       dispatch(reqError(true));
+      console.log(error);
       alert("Posting Denied!!!")
     }
     finally{
@@ -66,12 +61,11 @@ export const __postComment=(payload)=>{
 }
 
 
-export const __getComment=()=>{
-  
+export const __getComment=(payload)=>{
   return async function(dispatch,getState){
     try{
       dispatch(serverReq(true));
-      const {data} = await axios.get("http://localhost:4000/posts");
+      const {data} = await apis.getComments(payload.board_id);
       dispatch(Load({data}));
       }
       catch(error){
@@ -81,7 +75,7 @@ export const __getComment=()=>{
       }
       finally{
         dispatch(serverReq(false));
-      }
+    }
   }
 }
 
@@ -132,7 +126,7 @@ export const __editComment=(payload)=>{
 function comment(state=initialState,action){
   switch(action.type)
   {
-    case ADD: return{...state,comment:[...state.comment]};
+    case ADD: return{...state,commentList:[...state.commentList]};
     case LOAD: return{...state,commentList:action.payload};
     case EDIT: return{};
     case DELETE: return{};

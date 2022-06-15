@@ -5,24 +5,27 @@ import { useRef } from 'react';
 import { __postComment } from '../redux/modules/comment';
 import { getCookie } from '../Cookie';
 
-const Commenting = () => {
-
+const Commenting = ({board_id}) => {
+   
     const dispatch=useDispatch();
     const reply_text=useRef(null);
+
+    const submit=(event)=>{
+        
+        event.preventDefault();
+        dispatch(__postComment({
+            reply_text: reply_text.current.value,
+            board_id:board_id,
+        }))
+        console.log("3");
+    }
+    
+
 
     const isToken = getCookie("token");
     const user_nick = getCookie("user_nick");
     const user_pic = getCookie("user_pic");
-    const submit=(event)=>{
-        event.preventDefault();
-        dispatch(__postComment({
-            reply_text: reply_text.current.value,
-            reply_id:getCookie("user_id"),
-            reply_nickname:getCookie("user_nick"),
-            reply_picURL:getCookie("user_pic"),
-        }))
-    }
-
+    
   return (
     <StCommentBox>
         
@@ -33,8 +36,8 @@ const Commenting = () => {
                 <StUserNick>{user_nick}</StUserNick>
             </StUserBox>
             <StInputBox ref={reply_text}/>
-            {isToken?<StSubmitButton onClick={submit}>Submit</StSubmitButton>:
-            <StSubmitButton onClick={submit} disabled="disabled">Submit</StSubmitButton>}
+           <StSubmitButton onClick={submit}>Submit</StSubmitButton>:
+            
         </StBody>
     </StCommentBox>
   )

@@ -7,11 +7,12 @@ import DetailBox from '../components/DetailBox'
 import CommentContainer from '../components/CommentContainer'
 // import middleware
 import { getPostsDB } from "../redux/modules/post"
-
+import { useParams } from 'react-router-dom';
 
 // detail 페이지
 
 const Detail = () => {
+  const board_id = useParams().board_id;
 
   const dispatch = useDispatch();
 
@@ -23,7 +24,7 @@ useEffect(() => {
     <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
       <Header/>
       <DetailBox/>
-      <CommentContainer/>
+      <CommentContainer board_id={board_id}/>
     </div>
   )
 }
