@@ -1,26 +1,20 @@
 /* IMPORT */
-import React,{ useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react'
 // import components
 import Card from "./Card";
 import { StContainer } from "./StyleG";
-//import middleware
-import { getPostsDB } from "../redux/modules/post";
+// import axios instance
+import { useGetPosts } from '../Hooks/useGetPosts';
 
 // home 화면 카드들 map 돌리는 컴포넌트
 
 const CardContainer = () => {
+ 
+  const { data } = useGetPosts();
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getPostsDB())
-  },[])
-
-  const postList = useSelector(state => state.post.list);
   return (
     <StContainer>
-        {postList.map((value, index) => {
+        {data?.map((value, index) => {
           return <Card
             key={index}
             id={value.board_id}
