@@ -22,13 +22,8 @@ const Login = () => {
       username:user_email.current.value,
       password:user_pw.current.value,
     }))
-    if(getCookie("token")){
       alert("Hello!!");
     navigate("/");
-    }
-    else{
-      alert("Check your ID and Password")
-    }
   }
 
   const moveHome=()=>{

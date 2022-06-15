@@ -146,7 +146,7 @@ export const __login=(payload)=>{
     }catch(error){
       console.log(error);
       dispatch(reqError(true));
-      //alert("Check your ID and Password");
+      alert("Check your ID and Password");
     }finally{
       dispatch(serverReq(false));
     }
