@@ -1,7 +1,7 @@
 /* IMPORT */
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 // import Router
 import { Link } from 'react-router-dom';
@@ -26,35 +26,34 @@ const DetailBox = () => {
   const post = data.find(value => postId === value.board_id);
 
   const onDeletePostHandler = () => {
-    dispatch(deletePostDB(post?.board_id));
-    dispatch(deleteImgFB(post?.board_imgURL))
+    dispatch(deletePostDB(post.board_id));
+    dispatch(deleteImgFB(post.board_imgURL))
     alert("게시글이 삭제되었습니다.");
     navigate('/');
   }
 
   const nickname = getCookie("user_nick");
 
-
   return (
     <StDetailContainer>
       <StDetailBox>
-        <h2 style={{color:"white"}}>{post?.board_title}</h2>
+        <h2 style={{color:"white"}}>{post.board_title}</h2>
         <StDiv>
-          <StImg src={post?.board_imgURL}></StImg>
+          <StImg src={post.board_imgURL}></StImg>
           <StContentBox>
             <StLikeBox>
               <StLikeLogo><img src={likeLogo} style={{width:"70%", height: "80%"}}/></StLikeLogo>
-              <div style={{display:"flex", alignItems:"center", justifyContent:"center",width:"200px"}}>좋아요 {post?.like}개</div>
+              <div style={{display:"flex", alignItems:"center", justifyContent:"center",width:"200px"}}>댓글 {post.like}개</div>
             </StLikeBox>
             <StUserBox>
-              <StUserImg src={post?.user_picURL}></StUserImg>
-              <span style={{fontWeight:"bold"}}>{post?.nickname}</span>
+              <StUserImg src={post.user_picURL}></StUserImg>
+              <span style={{fontWeight:"bold"}}>{post.nickname}</span>
             </StUserBox>
             <div style={{height:"90%"}}>
-              <span style={{color:"white"}}>{post?.board_text}</span>
+              <span style={{color:"white"}}>{post.board_text}</span>
             </div>
             <div style={{height:"10%", display:"flex", justifyContent:"center", alignItems:"center"}}>
-              {nickname===post?.nickname?(<><StLink to = {`/edit/${postId}`}><StBtn>수정하기</StBtn></StLink><StBtn onClick={onDeletePostHandler}>삭제하기</StBtn></>):<></>}
+              {nickname===post.nickname?(<><StLink to = {`/edit/${postId}`}><StBtn>수정하기</StBtn></StLink><StBtn onClick={onDeletePostHandler}>삭제하기</StBtn></>):<></>}
             </div>
           </StContentBox> 
         </StDiv>   

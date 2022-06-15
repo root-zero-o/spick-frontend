@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 // import style
 import { StInputBox, StTitleInput, StImg, StLabel, StTextInput,  StBtnDiv, StBtn } from "../pages/input";
 // import middleware
@@ -9,6 +8,8 @@ import { deleteImgFB, putPostDB, getLoading } from '../redux/modules/post';
 // import FireBase storage
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../shared/firebase";
+// import Hook
+import { useGetPosts } from '../Hooks/useGetPosts';
 
 
 const EditBox = () => {
@@ -20,18 +21,13 @@ const EditBox = () => {
     const titleInput = useRef(null);
     const textInput = useRef(null);
 
-    const [post, setPost] = useState(undefined);
     const [fileURL, setFileURL] = useState("");
     const [FileChanged, setFileChanged] = useState(false);
 
-    const postList = useSelector(state => state.post.list)
+    const { data } = useGetPosts();
 
-    useEffect(() => {
-        const post = postList.find(value => postId === String(value.board_id));
-        if(post){
-            setPost(post)
-        }   
-    },[post, postId, postList])
+    const post = data.find(value => postId === String(value.board_id));
+
 
     // 이미지 FB에 업로드하는 미들웨어
   const uploadImgFB = (event) => {
@@ -56,7 +52,7 @@ const EditBox = () => {
 
     const onChangeImgInput = (event) => {
         dispatch(uploadImgFB(event));
-        dispatch(deleteImgFB(post?.board_imgURL));
+        dispatch(deleteImgFB(post.board_imgURL));
         setFileChanged(true);   
     }
 
@@ -72,11 +68,11 @@ const EditBox = () => {
 
   return (
     <StInputBox>
-        <StTitleInput defaultValue={post?.board_title} ref={titleInput}/>
+        <StTitleInput defaultValue={post.board_title} ref={titleInput}/>
         <div style={{display:"flex", width:"770px", height:"400px"}}>           
             { FileChanged ? 
                     (<StImg src={fileURL}/>) : 
-                    (<StImg src={post?.board_imgURL}/>)
+                    (<StImg src={post.board_imgURL}/>)
             }
             
             <div style={{width:"50%", height:"100%"}}>
@@ -86,7 +82,7 @@ const EditBox = () => {
                     style={{display:"none"}}
                     id="file"
                     onChange={onChangeImgInput}/>
-                <StTextInput defaultValue={post?.board_text} ref={textInput}/>
+                <StTextInput defaultValue={post.board_text} ref={textInput}/>
                 <StBtnDiv>
                     <StBtn onClick={onPutPostHandler}>수정하기</StBtn>
                     <Link to={'/'}><StBtn>돌아가기</StBtn></Link>
@@ -97,10 +93,5 @@ const EditBox = () => {
     
   )
 }
-
-const StBox = styled.div`
-    display: flex;
-    margin: 20px;
-`;
 
 export default EditBox;
