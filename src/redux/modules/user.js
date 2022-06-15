@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react'
-import { setCookie , getCookie} from '../../Cookie';
+import { setCookie , getCookie, removeCookie} from '../../Cookie';
 import { useSelector } from 'react-redux';
 
 const initialState = {
@@ -143,7 +143,6 @@ export const __login=(payload)=>{
    setCookie("user_nick",login.headers.nickname);
    setCookie("user_pic",login.headers.user_picurl);
    dispatch(reqSucess(true));
-   console.log(login);
    dispatch(__IsLogin())
     }catch(error){
       console.log(error);
@@ -162,6 +161,16 @@ export const __IsLogin = () => {
       dispatch(is_login(true))
     }
   }
+}
+
+export const __IsLogout = () => {
+  return async function(dispatch){
+    removeCookie("token");
+    removeCookie("user_pic");
+    removeCookie("user_nick");
+    removeCookie("user_id");
+    dispatch(is_login(false));
+  } 
 }
 
 
