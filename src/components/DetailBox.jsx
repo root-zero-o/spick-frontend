@@ -17,7 +17,7 @@ const DetailBox = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const postId = Number(useParams().board_id);
-
+ 
   const [post, setPost] = useState(undefined);
 
   const postList = useSelector(state => state.post.list)

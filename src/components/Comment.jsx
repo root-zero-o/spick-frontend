@@ -23,8 +23,8 @@ import { __postComment,__editComment } from '../redux/modules/comment';
             reply_id:props.user_id,
             reply_nickname:props.user_nick,
             reply_picURL:props.user_pic,
-            reply_text:text,
-            board_id:board_id,
+            reply_text:text.current.value,
+            board_id:props.board_id,
         }))
     }
     
@@ -37,8 +37,8 @@ import { __postComment,__editComment } from '../redux/modules/comment';
             reply_id:props.user_id,
             reply_nickname:props.user_nick,
             reply_picURL:props.user_pic,
-            reply_text:text,
-            board_id:board_id,
+            reply_text:text.current.value,
+            board_id:props.board_id,
         }))
     }
     // key = {index}

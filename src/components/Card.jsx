@@ -7,21 +7,25 @@ import { Link } from 'react-router-dom';
 // home 화면에서 게시글을 보여주는 card 하나에 해당하는 컴포넌트
 
 const Card = ({id, board_title, board_imgURL, nickname, user_picURL, like}) => {
-  return (
+    return (
     <StLink to={`/detail/${id}`}>
         <StCardBox>
-            <StPostBox width="55%">
+            <StPostBox width="75%">
+                <StImgBox>
                 <StImg src={board_imgURL}></StImg>
+                </StImgBox>
                 <StDiv>
                     <StSpan>{board_title}</StSpan>
                 </StDiv>
             </StPostBox>
-            <StPostBox width="45%">
-                <StDiv>
-                    <StLikeDiv> 좋아요 {like}개</StLikeDiv>
+            <StPostBox width="25%">
+                    <StInfo>
+                    <StUser>
                     <StUserImg src={user_picURL}></StUserImg>
-                    <StSpan>{nickname}</StSpan>
-                </StDiv>
+                    <StSpan2>{nickname}</StSpan2>
+                    </StUser>
+                    <StLikeDiv> 좋아요 {like}개</StLikeDiv>
+                    </StInfo>
             </StPostBox>
         </StCardBox> 
     </StLink>
@@ -29,6 +33,28 @@ const Card = ({id, board_title, board_imgURL, nickname, user_picURL, like}) => {
 }
 
 /* STYLED-COMPONENT */
+
+const StInfo = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 0 1rem;
+    align-items: center;
+`;
+
+const StUser = styled.div`
+    display: flex;
+    margin: 0 0 1rem 0;
+    align-items: center;
+`;
+
+
+const StImgBox = styled.div`
+    width: 600px;
+    height: 140px;
+    overflow: hidden;
+    background-position:center ;
+    max-width: 227.5px;
+`;
 
 const StLink = styled(Link)`
     text-decoration: none;
@@ -39,7 +65,7 @@ const StCardBox = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 900px;
-    height: 120px;
+    height: 140px;
     margin: 10px 0px;
     background-color: rgba(0,0,0,0.2);
     box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
@@ -76,10 +102,11 @@ const StUserImg= styled.img`
     border-radius: 50%;
 `;
 
-
 const StImg = styled.img`
-    width: 500px;
+    width: 100%;
     height: 100%;
+    overflow: hidden;
+
 `;
 
 const StDiv = styled.div`
@@ -91,6 +118,12 @@ const StDiv = styled.div`
 `;
 
 const StSpan = styled.span`
+    color: white;
+    font-size: 35px;
+    font-weight: 400;
+`;
+
+const StSpan2 = styled.span`
     color: white;
     font-size: 25px;
 `;
