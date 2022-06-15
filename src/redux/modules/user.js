@@ -109,10 +109,9 @@ export const __signUp=(payload)=>{
           nickname : payload.nickname,
           passwordCheck : payload.passwordCheck,
           user_picURL : payload.user_picURL
-
         }
        })
-
+     alert("Welcome to SPICK!!\n Login and Join Our Service!!") 
     }catch(error){
       console.log(error);
       dispatch(reqError(true));
@@ -148,7 +147,7 @@ export const __login=(payload)=>{
     }catch(error){
       console.log(error);
       dispatch(reqError(true));
-      alert("Check your ID and Password");
+      //alert("Check your ID and Password");
     }finally{
       dispatch(serverReq(false));
     }

@@ -53,6 +53,10 @@ const Signup = () => {
     dispatch(__nickCheck({
       nickname : user_nickname.current.value,
     }))
+    if((user_nickname.current.value).length>6){
+      alert("It's longer than 6 letters")
+    }
+
   }
 
   // 이미지 업로드 onchange event
