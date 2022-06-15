@@ -1,5 +1,4 @@
 /* IMPORT */
-import { Translate } from 'aws-sdk';
 import React from 'react'
 import styled from 'styled-components';
 

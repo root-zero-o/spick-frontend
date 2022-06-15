@@ -30,7 +30,7 @@ const Signup = () => {
 
   // 회원가입 입력 정보 보내기
   const submit=()=>{
-    
+
     if(reg_email.test(user_email.current.value)){
       dispatch(__signUp({
         username : user_email.current.value,
@@ -44,7 +44,6 @@ const Signup = () => {
     else {
       alert("It's not a Email Form")
     }
-
   }
 
   // 이메일 체크

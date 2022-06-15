@@ -11,7 +11,6 @@ import { useGetPosts } from '../Hooks/useGetPosts';
 const CardContainer = () => {
  
   const { data } = useGetPosts();
-  console.log(data)
   return (
     <StContainer>
         {data?.map((value, index) => {
