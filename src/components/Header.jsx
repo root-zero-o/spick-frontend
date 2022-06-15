@@ -1,5 +1,5 @@
 /* IMPORT */
-import React,{ useEffect } from "react"
+import React,{ useEffect, useRef } from "react"
 import { useDispatch, useSelector } from 'react-redux';
 // import components
 import styled from "styled-components";
@@ -9,21 +9,32 @@ import logo from "../images/logo.png";
 import { Link } from 'react-router-dom';
 // import middleware
 import { __IsLogin, __IsLogout } from "../redux/modules/user";
+import { __search } from "../redux/modules/search.js";
 
 // 헤더
 const Header = () => {
 
     const dispatch = useDispatch();
+    const searchInput = useRef(null);
 
+    // 로그인 여부 판별
     const isLogin = useSelector(state => state.user.isLogin) 
 
     useEffect(() => {
         dispatch(__IsLogin())
       },[dispatch, isLogin])
 
+    // 로그아웃 버튼 이벤트
     const onLogOutHandler = () => {
         dispatch(__IsLogout());
         alert("로그아웃 되었습니다!")
+    }
+
+    // 검색어 입력 버튼 이벤트
+    const onSearchHandler = () => {
+        const replacedInput = searchInput.current.value.replace(/ /g,"");
+        console.log(replacedInput)
+        dispatch(__search(replacedInput))
     }
 
   return (
@@ -47,8 +58,8 @@ const Header = () => {
                 </>
             )}
             
-            <StSearchInput placeholder="검색하기"/>
-            <StSearchBtn>🔍</StSearchBtn>
+            <StSearchInput ref={searchInput}placeholder="검색하기"/>
+            <Link to={'/search'}><StSearchBtn onClick={onSearchHandler}>🔍</StSearchBtn></Link>
         </StLogInDiv>
     </StHeaderWrapper>
   )
@@ -60,8 +71,8 @@ const StHeaderWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width : 1100px;
-    min-width: 800px;
+    width : 100vw;
+    max-width: 1000px;
     height: 15vh;
     min-height: 150px;
     margin: 30px 0px;

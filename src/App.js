@@ -10,12 +10,8 @@ import Mypage from './pages/mypage';
 import Input from './pages/input';
 import Edit from './pages/edit';
 import Detail from './pages/detail';
-
 // import react-query
 import {
-  useQuery,
-  useMutation,
-  useQueryClient,
   QueryClient,
   QueryClientProvider,
 } from 'react-query'
@@ -38,6 +34,7 @@ function App() {
         <Route path = "/edit/:id" element={<Edit/>}/>
         <Route path = "/detail/:board_id" element={<Detail/>}/>
         <Route path = "/aboutus" element={<AboutUs/>}/>
+        <Route path = "/search" element={<Search/>}/>
       </Routes>
     </QueryClientProvider>
   );
