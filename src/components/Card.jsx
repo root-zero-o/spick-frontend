@@ -24,7 +24,7 @@ const Card = ({id, board_title, board_imgURL, nickname, user_picURL, like}) => {
                     <StUserImg src={user_picURL}></StUserImg>
                     <StSpan2>{nickname}</StSpan2>
                     </StUser>
-                    <StLikeDiv> 좋아요 {like}개</StLikeDiv>
+                    <StLikeDiv> 댓글 {like}개</StLikeDiv>
                     </StInfo>
             </StPostBox>
         </StCardBox> 
