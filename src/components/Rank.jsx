@@ -7,9 +7,9 @@ const Rank = (props) => {
   return (
     <StRankWrap isLeft={props.isLeft}>
         <StRankCard>
-            <StImg></StImg>
+            <StImg src={props.board_imgURL}></StImg>
             <StText>
-              <StLike>좋아요 0개</StLike>
+              <StLike>댓글 {props.replycount}개</StLike>
             </StText>
         </StRankCard>
     </StRankWrap>
@@ -27,12 +27,12 @@ const StRankWrap = styled.div`
     float: left;
     transition: transform 0.5s ease-in-out;
     transform: ${ (props) => `translate(${props.isLeft}px)`};
-    &:hover{
+    /* &:hover{
       width: 910px;
       height:91%;
       transform: translateY(-10px);
       
-    }
+    } */
 `;
 
 const StRankCard = styled.div`
@@ -43,15 +43,21 @@ const StRankCard = styled.div`
     background: -webkit-linear-gradient(left, rgb(49,81,110) 0%, rgb(63,119,151) 100%);
     background: linear-gradient(to right, rgb(49,81,110) 0%, rgb(63,119,151) 100%);
     box-shadow: 0px 0px 5px rgba(0,0,0,0.7);
+    transition: transform 0.3s ease-in-out;
     &:hover{
       cursor: pointer;
       background: #4581A4;
+      width :230px;
+      transform: translateY(-10px);
     }
 `;
 
-const StImg = styled.div`
-  height: 80%;
+const StImg = styled.img`
+  width: 233px;
+  height: 100%;
+  overflow: hidden;
   background-color: #ddd;
+  
 `;
 
 const StText = styled.div`

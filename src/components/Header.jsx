@@ -125,12 +125,12 @@ const StBtn = styled.button`
     color: white;
     font-size: 15px;
     border: none;
-    transition: 80ms;
+    transition: transform 0.3s ease-in-out;
     &:hover{
         background: #307FC0;
         cursor: pointer;
         transform: translateY(-3px);
-        width: 93px;
+        
         height: 52px;
         border: 1px solid white;
     }

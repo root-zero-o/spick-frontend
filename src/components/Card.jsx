@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 // home 화면에서 게시글을 보여주는 card 하나에 해당하는 컴포넌트
 
-const Card = ({id, board_title, board_imgURL, nickname, user_picURL, like}) => {
+const Card = ({id, board_title, board_imgURL, nickname, user_picURL, comments}) => {
     return (
     <StLink to={`/detail/${id}`}>
         <StCardBox>
@@ -24,7 +24,7 @@ const Card = ({id, board_title, board_imgURL, nickname, user_picURL, like}) => {
                     <StUserImg src={user_picURL}></StUserImg>
                     <StSpan2>{nickname}</StSpan2>
                     </StUser>
-                    <StLikeDiv> 댓글 {like}개</StLikeDiv>
+                    <StLikeDiv> 댓글 {comments}개</StLikeDiv>
                     </StInfo>
             </StPostBox>
         </StCardBox> 
