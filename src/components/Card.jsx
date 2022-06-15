@@ -47,7 +47,6 @@ const StUser = styled.div`
     align-items: center;
 `;
 
-
 const StImgBox = styled.div`
     width: 600px;
     height: 140px;

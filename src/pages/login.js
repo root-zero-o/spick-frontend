@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useRef } from 'react';
 import { __login } from '../redux/modules/user';
-import { setCookie } from '../Cookie';
+import { getCookie, setCookie } from '../Cookie';
 // import middleware
 import { __IsLogin } from "../redux/modules/user";
 // 비밀번호 틀릴시 css 미구현
@@ -22,8 +22,13 @@ const Login = () => {
       username:user_email.current.value,
       password:user_pw.current.value,
     }))
-    alert("Hello!!");
+    if(getCookie("token")){
+      alert("Hello!!");
     navigate("/");
+    }
+    else{
+      alert("Check your ID and Password")
+    }
   }
 
   const moveHome=()=>{
