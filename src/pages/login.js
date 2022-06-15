@@ -22,10 +22,6 @@ const Login = () => {
       username:user_email.current.value,
       password:user_pw.current.value,
     }))
-<<<<<<< HEAD
-=======
-      alert("Hello!!");
->>>>>>> 921f9d3f6c0a926f1b54efa3a2ded65053059d3d
     navigate("/");
   }
 

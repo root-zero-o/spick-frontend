@@ -196,6 +196,7 @@ const AboutUs = () => {
      <Test5/>
      <Test2 data-aos="fade-right"
      data-aos-anchor-placement="top-center">Thanks for Scrolling</Test2>
+     <Test5/>
     </Box>
   )
 }

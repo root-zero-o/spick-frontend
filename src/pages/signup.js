@@ -14,12 +14,11 @@ import { storage } from "../shared/firebase";
 const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user_profile =useRef(null);
   const user_email = useRef(null);
   const user_nickname = useRef(null);
   const password = useRef(null);
   const passwordCheck = useRef(null);
-
+  const reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
   const [fileView, setFileView] = useState("");
   const [fileUploaded, setFileUploaded] = useState(false);
   const [fileURL, setFileURL] = useState("");
@@ -31,14 +30,21 @@ const Signup = () => {
 
   // 회원가입 입력 정보 보내기
   const submit=()=>{
-    dispatch(__signUp({
-      username : user_email.current.value,
-      password : password.current.value,
-      nickname : user_nickname.current.value,
-      passwordCheck : passwordCheck.current.value,
-      user_picURL : fileURL,
-    }))
-    navigate("/login");
+    
+    if(reg_email.test(user_email.current.value)){
+      dispatch(__signUp({
+        username : user_email.current.value,
+        password : password.current.value,
+        nickname : user_nickname.current.value,
+        passwordCheck : passwordCheck.current.value,
+        user_picURL : fileURL,
+      }))
+      navigate("/login");
+    }
+    else {
+      alert("It's not a Email Form")
+    }
+
   }
 
   // 이메일 체크
@@ -56,7 +62,6 @@ const Signup = () => {
     if((user_nickname.current.value).length>6){
       alert("It's longer than 6 letters")
     }
-
   }
 
   // 이미지 업로드 onchange event
@@ -114,7 +119,7 @@ const Signup = () => {
       <Box>
           <StEmail>SPICK Account name</StEmail>
           <CheckBox>
-            <StInput placeholder='6자 이하의 문자로 입력해주세요' max="6" ref={user_nickname}/>
+            <StInput placeholder='6자 이하의 문자로 입력해주세요' maxLength="6" ref={user_nickname}/>
             <IdCheckButton onClick={nickCheck}>Nick Check</IdCheckButton>
           </CheckBox>      
       </Box>

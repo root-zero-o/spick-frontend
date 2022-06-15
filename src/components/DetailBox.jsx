@@ -44,7 +44,7 @@ const DetailBox = () => {
           <StContentBox>
             <StLikeBox>
               <StLikeLogo><img src={likeLogo} style={{width:"70%", height: "80%"}}/></StLikeLogo>
-              <div style={{display:"flex", alignItems:"center", justifyContent:"center",width:"200px"}}>좋아요 {post?.like}개</div>
+              <div style={{display:"flex", alignItems:"center", justifyContent:"center",width:"200px"}}>댓글 {post?.like}개</div>
             </StLikeBox>
             <StUserBox>
               <StUserImg src={post?.user_picURL}></StUserImg>

@@ -138,7 +138,7 @@ export const __login=(payload)=>{
    })
    const accessToken=login.headers.authorization;
   
-    alert("hello");
+    alert("Welcome to Spick!!");
    setCookie("token",accessToken);
    setCookie("user_id",login.headers.username);
    setCookie("user_nick",login.headers.nickname);

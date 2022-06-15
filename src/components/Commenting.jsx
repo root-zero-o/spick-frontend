@@ -3,12 +3,20 @@ import styled from 'styled-components'
 import { useDispatch } from 'react-redux';
 import { useRef } from 'react';
 import { __postComment } from '../redux/modules/comment';
+import { useParams } from 'react-router-dom';
 import { getCookie } from '../Cookie';
+import { useGetPosts } from '../Hooks/useGetPosts';
 
 const Commenting = ({board_id}) => {
    
     const dispatch=useDispatch();
     const reply_text=useRef(null);
+    const postId = Number(useParams().board_id);
+
+    const {data} = useGetPosts();
+    const board = data.find(value=>value.board_id == postId)
+    console.log(board);
+    const board_title = board.board_title;
 
     const submit=(event)=>{
         
@@ -29,7 +37,7 @@ const Commenting = ({board_id}) => {
   return (
     <StCommentBox>
         
-        <StTitle> Company of Heroes2 제품에 대한 평가 작성</StTitle>
+        <StTitle> {board_title} 제품에 대한 평가 작성</StTitle>
         <StBody>
             <StUserBox>
                 <StUserPic src={user_pic}/>
