@@ -61,30 +61,30 @@ export const __postComment=(payload)=>{
 }
 
 
-export const __getComment=(payload)=>{
-  return async function(dispatch,getState){
-    try{
-      dispatch(serverReq(true));
-      const {data} = await apis.getComments(payload.board_id);
-      dispatch(Load({data}));
-      }
-      catch(error){
-        dispatch(reqError(true));
-        console.log(error)
-        alert("Can't get CommentList!!")
-      }
-      finally{
-        dispatch(serverReq(false));
-    }
-  }
-}
+// export const __getComment=(payload)=>{
+//   return async function(dispatch,getState){
+//     try{
+//       dispatch(serverReq(true));
+//       const {data} = await apis.getComments(payload.board_id);
+//       dispatch(Load({data}));
+//       }
+//       catch(error){
+//         dispatch(reqError(true));
+//         console.log(error)
+//         alert("Can't get CommentList!!")
+//       }
+//       finally{
+//         dispatch(serverReq(false));
+//     }
+//   }
+// }
 
 
-export const __deleteComment=(id)=>{
+export const __deleteComment=(payload)=>{
   return async function(dispatch,getState){
     dispatch(serverReq(true))
     try{
-      await axios.delete(`http://localhost:4000/posts/${id}`)
+      await apis.deleteComment(payload);
       alert("Your Comment has been Deleted")
     }
     catch(error){
@@ -98,20 +98,11 @@ export const __deleteComment=(id)=>{
 }
 
 export const __editComment=(payload)=>{
+  console.log(payload);
   return async function(dispatch,getState){
     dispatch(serverReq(true));
     try{
-      const editComment= await axios({
-        method:"put",
-        url:"http://localhost:4000/posts",
-        data:{
-          reply_id: payload.reply_id,
-          reply_nickname: payload.reply_nickname,
-          reply_picURL: payload.reply_picURL,
-          reply_text: payload.reply_text,
-          board_id:payload.board_id,
-        }
-      })
+      const editComment= await apis.putComment(payload)
     }
     catch(error){
       dispatch(reqError(true))

@@ -137,7 +137,7 @@ export const __login=(payload)=>{
     }
    })
    const accessToken=login.headers.authorization;
-  
+   console.log(login);
     alert("Welcome to Spick!!");
    setCookie("token",accessToken);
    setCookie("user_id",login.headers.username);
@@ -145,7 +145,7 @@ export const __login=(payload)=>{
    setCookie("user_pic",login.headers.user_picurl);
    dispatch(reqSucess(true));
    dispatch(__IsLogin());
-  
+    
   }catch(error){
       console.log(error);
       dispatch(reqError(true));

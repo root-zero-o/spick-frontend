@@ -21,7 +21,7 @@ const CardContainer = () => {
             board_imgURL={value.board_imgURL}
             nickname={value.nickname}
             user_picURL={value.user_picURL}
-            like={value.like}/>
+            comments={value.replycount}/>
         })}
     </StContainer>
   )
