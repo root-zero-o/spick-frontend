@@ -57,6 +57,7 @@ const StPostBox = styled.div`
     justify-content: flex-end;
     width: ${(props) => props.width};
     height: 95%;
+
 `;
 
 const StLikeDiv = styled.div`

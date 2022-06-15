@@ -7,6 +7,8 @@ import { useDispatch } from 'react-redux';
 import { useRef } from 'react';
 import { __login } from '../redux/modules/user';
 import { setCookie } from '../Cookie';
+// import middleware
+import { __IsLogin } from "../redux/modules/user";
 // 비밀번호 틀릴시 css 미구현
 
 const Login = () => {
@@ -15,12 +17,12 @@ const Login = () => {
   const user_email = useRef(null);
   const user_pw = useRef(null);
 
-  const login= (event)=>{
-    event.preventDefault();
+  const login= ()=>{
     dispatch(__login({
       username:user_email.current.value,
       password:user_pw.current.value,
     }))
+    alert("Hello!!");
     navigate("/");
   }
 

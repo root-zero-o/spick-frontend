@@ -4,10 +4,11 @@ import { setCookie , getCookie} from '../../Cookie';
 import { useSelector } from 'react-redux';
 
 const initialState = {
-  user:[],
+  list:[],
   login:false,
   error:false,
   loading:false,
+  isLogin: false
 }
 
 const SERVER_REQ="user/SERVER_REQ"  // loading check
@@ -17,6 +18,7 @@ const LOGIN = "user/LOGIN"; // login post
 const SIGNUP = "user/SIGNUP"; // signup post
 const IDCHECK = "user/IDCHECK"; // id check
 const NICKCHECK = "user/NICKCHECK"; // id check
+const IS_LOGIN = "user/IS_LOGIN" // token check
 
 export function serverReq(payload){
   return{type:SERVER_REQ,payload}
@@ -38,6 +40,9 @@ export function IdCheck(payload){
 }
 export function NickCheck(payload){
   return{type:NICKCHECK,payload}
+}
+export const is_login = (payload) => {
+  return ({type : IS_LOGIN, payload})
 }
 
 export const __idCheck = (payload)=>{
@@ -139,7 +144,7 @@ export const __login=(payload)=>{
    setCookie("user_pic",login.headers.user_picurl);
    dispatch(reqSucess(true));
    console.log(login);
-   alert("Hello!!");
+   dispatch(__IsLogin())
     }catch(error){
       console.log(error);
       dispatch(reqError(true));
@@ -150,8 +155,17 @@ export const __login=(payload)=>{
   }
 }
 
+export const __IsLogin = () => {
+  return async function(dispatch) {
+    const token = getCookie("token")
+    if(token){
+      dispatch(is_login(true))
+    }
+  }
+}
 
-function user(state=initialState,action){
+
+export default function user (state=initialState,action){
   switch(action.type){
     case REQ_SUCCESS:{
       return{...state,login:action.payload};
@@ -168,8 +182,10 @@ function user(state=initialState,action){
     case NICKCHECK:{
       return{...state,nickcheck:action.payload}
     }
+    case IS_LOGIN :{
+      return {...state, isLogin: action.payload}
+    }
     default:
       return{...state};
   }
 }
-export default user;

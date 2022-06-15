@@ -1,14 +1,25 @@
 /* IMPORT */
-import React from "react"
+import React,{ useEffect } from "react"
+import { useDispatch, useSelector } from 'react-redux';
 // import components
 import styled from "styled-components";
 // import image
 import logo from "../images/logo.png";
 // import Router
 import { Link } from 'react-router-dom';
+// import middleware
+import { __IsLogin } from "../redux/modules/user";
 
 // 헤더
-const Header = ({isLogin}) => {
+const Header = () => {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(__IsLogin())
+      },[dispatch])
+
+    const isLogin = useSelector(state => state.user.isLogin) 
 
   return (
     <StHeaderWrapper>
