@@ -19,7 +19,7 @@ const CommentContainer = ({board_id}) => {
 
   return (
     <>
-    {getCookie("token")===undefined?<></>:<Commenting board_id={board_id}/>}
+    {getCookie("token")===undefined?<></>:<Commenting board_id={board_id} />}
        {
         commentList.data === undefined ? 
          "" :commentList.data.map((value,index)=>{

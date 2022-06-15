@@ -133,7 +133,6 @@ const AboutUs = () => {
      </>
      <Test5/>
      <Contact>
-       
         <Title>Contact Us!</Title>
         <A>💁‍♀️ Click 하시면 깃허브로 이동!</A>
         <Address>
@@ -196,6 +195,7 @@ const AboutUs = () => {
      <Test5/>
      <Test2 data-aos="fade-right"
      data-aos-anchor-placement="top-center">Thanks for Scrolling</Test2>
+     <Test5/>
     </Box>
   )
 }
