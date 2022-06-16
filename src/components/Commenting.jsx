@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { __postComment } from '../redux/modules/comment';
 import { getCookie } from '../Cookie';
 import { useGetPosts } from '../Hooks/useGetPosts';
+import win from 'global';
 
 const Commenting = ({board_id}) => {
    
@@ -21,6 +22,7 @@ const Commenting = ({board_id}) => {
             reply_text: reply_text.current.value,
             board_id:board_id,
         }))
+
         alert("댓글이 등록되었습니다.");
         window.location.reload();
     }

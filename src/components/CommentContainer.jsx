@@ -18,7 +18,6 @@ const CommentContainer = ({board_id}) => {
   const {data} = useGetComment({board_id});
 
   
-  const commentList = useSelector(state=>state.comment.commentList);
   return (
     <>
     {getCookie("token")===undefined?<></>:<Commenting board_id={board_id} />}

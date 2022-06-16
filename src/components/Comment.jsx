@@ -26,7 +26,7 @@ import { __postComment,__editComment, __deleteComment } from '../redux/modules/c
         dispatch(__deleteComment({
             reply_id:props.id,
             board_id:props.board_id}))
-        alert("Comment has been deleted!")
+      //  alert("Comment has been deleted!")
     }
 
     const submit=(text,board_id)=>{
@@ -37,14 +37,9 @@ import { __postComment,__editComment, __deleteComment } from '../redux/modules/c
             reply_text:text.current.value,
             board_id:props.board_id,
         }))
+        alert("댓글 수정 완료!")
+        window.location.reload();
     }
-
-    // key = {index}
-    // id={value.id} 
-    // comment={value.reply_text} 
-    // user_id={value.reply_id} 
-    // user_pic={value.reply_picURL}
-    // user_nick={value.reply_nickname}/>
 
 
   return (
@@ -54,7 +49,7 @@ import { __postComment,__editComment, __deleteComment } from '../redux/modules/c
         {editCheck ? 
         (<StCommentBox>
             <StUserBox><StUserPic src={props.user_pic}/><StUserNick><strong>{props.user_nick}</strong></StUserNick></StUserBox>
-            <StInputBox type="text" ref={text}/*onChange={(event)=>setCommenting(event.target.value)}*//>
+            <StInputBox type="text" ref={text} defaultValue={props.comment}/*onChange={(event)=>setCommenting(event.target.value)}*//>
             <StButton onClick={()=>{submit(text,board_id)}}>Submit</StButton>
         </StCommentBox>):
         (<StCommentBox>
@@ -134,9 +129,9 @@ const StUserBox=styled.div`
 
 const StInputBox=styled.input`
     width:500px;
-    height:8rem;
+    height:7rem;
     margin:0 0 0 3rem;
-    background-color: tomato;
+    background-color: #264357;
     color: white;
 `;
 

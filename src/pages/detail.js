@@ -8,6 +8,7 @@ import CommentContainer from '../components/CommentContainer'
 // import middleware
 import { getPostsDB } from "../redux/modules/post"
 import { useParams } from 'react-router-dom';
+import { useGetComment } from '../Hooks/useGetComment';
 
 // detail 페이지
 

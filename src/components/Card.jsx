@@ -11,6 +11,7 @@ const Card = ({id, board_title, board_imgURL, nickname, user_picURL, comments}) 
     <StLink to={`/detail/${id}`}>
         <StCardBox>
             <StPostBox width="75%">
+                
                 <StImgBox>
                 <StImg src={board_imgURL}></StImg>
                 </StImgBox>
