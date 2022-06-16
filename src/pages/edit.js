@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components'
 // import component
 import Header from '../components/Header';
 import EditBox from '../components/EditBox';
@@ -30,11 +30,11 @@ const Edit = () => {
 }
 
 const StEditWrap = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
 `;
 
 export const StLoadingBox = styled.div`

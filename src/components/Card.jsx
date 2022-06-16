@@ -38,22 +38,22 @@ const Card = ({id, board_title, board_imgURL, nickname, user_picURL, comments}) 
 const StInfo = styled.div`
     display: flex;
     flex-direction: column;
-    margin: 0 0 0 1rem;
     align-items: center;
+    margin: 0 0 0 1rem;
 `;
 
 const StUser = styled.div`
     display: flex;
-    margin: 0 0 1rem 0;
     align-items: center;
+    margin: 0 0 1rem 0;
 `;
 
 const StImgBox = styled.div`
     width: 600px;
     height: 140px;
+    max-width: 227.5px;
     overflow: hidden;
     background-position:center ;
-    max-width: 227.5px;
 `;
 
 const StLink = styled(Link)`
@@ -79,8 +79,8 @@ const StCardBox = styled.div`
 
 const StPostBox = styled.div`
     display: flex;
-    align-items: center;
     justify-content: flex-end;
+    align-items: center;
     width: ${(props) => props.width};
     height: 95%;
 

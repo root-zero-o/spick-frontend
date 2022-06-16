@@ -97,6 +97,25 @@ export const __deleteComment=(payload)=>{
   }
 }
 
+
+export const __deleteComments=(payload)=>{
+  console.log(payload.board_id);
+  return async function(dispatch,getState){
+    dispatch(serverReq(true))
+    try{
+      await apis.deleteComment(payload);
+      alert("Your Comment has been Deleted")
+    }
+    catch(error){
+      dispatch(reqError(true));
+      alert("Comment Delete Error")
+    }
+    finally{
+      dispatch(serverReq(false))
+    }
+  }
+}
+
 export const __editComment=(payload)=>{
   console.log(payload);
   return async function(dispatch,getState){

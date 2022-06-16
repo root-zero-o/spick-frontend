@@ -64,6 +64,7 @@ const EditBox = () => {
             text: textInput.current.value
         }))
         navigate('/');
+        window.location.reload();
     }
 
   return (

@@ -12,6 +12,7 @@ import { deletePostDB, deleteImgFB } from "../redux/modules/post";
 import { getCookie } from '../Cookie';
 // import Hook
 import { useGetPosts } from '../Hooks/useGetPosts';
+import { __deleteComment , __deleteComments} from '../redux/modules/comment';
 
 
 // detail 페이지에서 해당 게시글 정보가 담기는 컴포넌트
@@ -23,9 +24,12 @@ const DetailBox = () => {
 
   const { data } = useGetPosts();
   const post = data?.find(value => postId === value.board_id);
+
   const onDeletePostHandler = () => {
     dispatch(deletePostDB(post?.board_id));
     dispatch(deleteImgFB(post?.board_imgURL))
+    dispatch(__deleteComments({
+          board_id:post?.board_id}))
     alert("게시글이 삭제되었습니다.");
     navigate('/');
   }
@@ -111,8 +115,8 @@ const StLikeLogo = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #1a435e;
   width: 60px;
+  background-color: #1a435e;
   &:hover{
     opacity: 0.5;
     cursor: pointer;

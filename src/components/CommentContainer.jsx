@@ -16,7 +16,7 @@ const CommentContainer = ({board_id}) => {
   // },[dispatch])
 
   const {data} = useGetComment({board_id});
-  console.log(data);
+
 
   return (
     <>

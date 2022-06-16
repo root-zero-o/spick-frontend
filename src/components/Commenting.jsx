@@ -2,10 +2,13 @@ import React, { useRef } from 'react'
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components'
+// import middleware
 import { __postComment } from '../redux/modules/comment';
+// import Cookie
 import { getCookie } from '../Cookie';
+// import Hook
 import { useGetPosts } from '../Hooks/useGetPosts';
-import win from 'global';
+
 
 const Commenting = ({board_id}) => {
    
@@ -22,7 +25,6 @@ const Commenting = ({board_id}) => {
             reply_text: reply_text.current.value,
             board_id:board_id,
         }))
-
         alert("댓글이 등록되었습니다.");
         window.location.reload();
     }
@@ -49,28 +51,28 @@ const StUserNick=styled.p`
     width:5rem;
     height:2rem;
     margin:0 0 0 1rem;
-    font-size: 0.8rem;
     color:#7f98af;
+    font-size: 0.8rem;
     text-align: center;
 `;
 
 const StUserPic=styled.img`
     width:4.5rem;
     height: 4.5rem;
-    background-color: yellow;
     margin:0 0 0.05rem 0.7rem;
+    background-color: yellow;
 `;
 
 const StTitle =styled.div`
-width: 100%;
-font-size: 1.2rem;
-color:#57beed;
+    width: 100%;
+    color:#57beed;
+    font-size: 1.2rem;
 `;
 
 const StBody =styled.div`
-height: 10rem;
-display: flex;
-align-items: center;
+    display: flex;
+    align-items: center;
+    height: 10rem;
 `;
 
 
@@ -91,37 +93,37 @@ const StSubmitButton = styled.button`
     color: #727da6;
     border:none;
     border-radius: 0.3rem;
+    cursor: pointer;
     &:hover{
         background: #66BFF2;
-background: -moz-linear-gradient(left, #66BFF2 0%, #549EC9 50%, #417A9B 100%);
-background: -webkit-linear-gradient(left, #66BFF2 0%, #549EC9 50%, #417A9B 100%);
-background: linear-gradient(to right, #66BFF2 0%, #549EC9 50%, #417A9B 100%);
-    color:white;
+        background: -moz-linear-gradient(left, #66BFF2 0%, #549EC9 50%, #417A9B 100%);
+        background: -webkit-linear-gradient(left, #66BFF2 0%, #549EC9 50%, #417A9B 100%);
+        background: linear-gradient(to right, #66BFF2 0%, #549EC9 50%, #417A9B 100%);
+        color:white;
 }
-    cursor: pointer;
 `;
 
 const StInputBox = styled.textarea`
     width:500px;
     height:7rem;
-    padding: 0.5rem;
     margin:0 0 0 1rem;
+    padding: 0.5rem;
     background-color: #222b35;
     color:white;
 `;
 
 const StCommentBox=styled.div`
     display: flex;
-    align-items: center;
     flex-direction: column;
-    padding: 0.5rem;
+    align-items: center;
     width: 800px;
     height: 12rem;
     margin: 10px 0px;
+    padding: 0.5rem;
     background: #313B46;
-background: -moz-linear-gradient(-45deg, #313B46 0%, #414D5A 51%, #576674 100%);
-background: -webkit-linear-gradient(-45deg, #313B46 0%, #414D5A 51%, #576674 100%);
-background: linear-gradient(135deg, #313B46 0%, #414D5A 51%, #576674 100%);
+    background: -moz-linear-gradient(-45deg, #313B46 0%, #414D5A 51%, #576674 100%);
+    background: -webkit-linear-gradient(-45deg, #313B46 0%, #414D5A 51%, #576674 100%);
+    background: linear-gradient(135deg, #313B46 0%, #414D5A 51%, #576674 100%);
     border-top: 2px solid #264357;
 `;
 
