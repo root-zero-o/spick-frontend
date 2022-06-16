@@ -16,8 +16,25 @@ import { __editComment, __deleteComment } from '../redux/modules/comment';
     const text = useRef(null);
     const board_id = useParams().id;
     const [editCheck , setEditCheck]=useState(false);
-
     
+    const time = props.createAt;
+    let day = time.split('T');
+     console.log(day);
+     let hour = day[1].split(':')
+    // console.log(hour[0]);
+     let khour = Number(hour[0])+9;
+    // console.log(khour);
+     hour[0]=String(khour);
+     day[1] = hour.join(":")
+     
+    let a = day[1].split(":");
+    let k = a.slice(0,2);
+    day[1] = k.join(":")
+    console.log(day[1])
+    console.log(day[0]+ " "+day[1])
+    let timed = day.join(" ");
+    console.log(timed)
+
     const edit=()=>{
         setEditCheck(true);
     }
@@ -61,6 +78,7 @@ import { __editComment, __deleteComment } from '../redux/modules/comment';
                 <StUserNick><strong>{props.user_nick}</strong></StUserNick>
             </StUserBox>
             <StTextBox>{props.comment}</StTextBox>
+            <StTime>{timed}</StTime>
             <StButtons>
                 <StButton onClick={edit}>Edit</StButton>
                 <StButton onClick={delet}>Delete</StButton>
@@ -74,6 +92,7 @@ import { __editComment, __deleteComment } from '../redux/modules/comment';
                 <StUserNick><strong>{props.user_nick}</strong></StUserNick>
             </StUserBox>
             <StTextBox>{props.comment}</StTextBox>
+            <StTime>{timed}</StTime>
         </StCommentBox>
         </>)
     }
@@ -87,7 +106,10 @@ const StButton=  styled.button`
     width:5rem;
     height:2rem;
     margin: 9px 0 9px 1rem;
-    background-color: #2b45 53;
+    background: #2C465B;
+background: -moz-linear-gradient(-45deg, #2C465B 0%, #2C465B 50%, #2A4559 100%);
+background: -webkit-linear-gradient(-45deg, #2C465B 0%, #2C465B 50%, #2A4559 100%);
+background: linear-gradient(135deg, #2C465B 0%, #2C465B 50%, #2A4559 100%);;
     color: #46a1d9;
     text-align: center;
     border:none;
@@ -146,10 +168,27 @@ const StInputBox=styled.input`
 const StTextBox = styled.div`
     display: flex;
     align-items: center;
-    width:500px;
+    text-align: center;
+    width:350px;
     height:8rem;
     margin:0 0 0 3rem;
+    font-size:1rem;
+    color:white;
+    //background-color: tomato;
+`;
+
+const StTime = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color : white;
+    font-size:0.7rem;
+    margin : 0 0 0 1rem;
+    width:150px;
+    height:8rem;
+    margin:0 0 0 1rem;
     text-align: center; 
+   // background-color: yellow;
 `;
 
 const StCommentBox=styled.div`

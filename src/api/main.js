@@ -22,7 +22,8 @@ const apis = {
     putComment : (payload)=> api.put(`/api/detail/${payload.board_id}/${payload.reply_id}`,{
         reply_text: payload.reply_text,
     }),
-    getRank : ()=>api.get(`/api/best`)
+    getRank : ()=>api.get(`/api/best`),
+    deleteComments : (payload)=>api.delete(`/api/detail/${payload.board_id}/reply`)
 }
 
 export default apis;
