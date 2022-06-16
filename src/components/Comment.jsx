@@ -1,11 +1,12 @@
 /* IMPORT */
-import React, { useState } from 'react'
-import { useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useRef } from 'react'
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components'
+// import Cookie
 import { getCookie } from '../Cookie';
-import { __postComment,__editComment, __deleteComment } from '../redux/modules/comment';
+// import middleware
+import { __editComment, __deleteComment } from '../redux/modules/comment';
 
 // 댓글 박스 하나 나타내는 컴포넌트!
 
@@ -14,7 +15,6 @@ import { __postComment,__editComment, __deleteComment } from '../redux/modules/c
     const dispatch = useDispatch();
     const text = useRef(null);
     const board_id = useParams().id;
-    const [commenting,setCommenting]=useState(true);
     const [editCheck , setEditCheck]=useState(false);
 
     
@@ -29,7 +29,7 @@ import { __postComment,__editComment, __deleteComment } from '../redux/modules/c
       //  alert("Comment has been deleted!")
     }
 
-    const submit=(text,board_id)=>{
+    const submit=(text)=>{
         dispatch(__editComment({
             reply_id:props.id,
             reply_nickname:props.user_nick,
@@ -44,26 +44,35 @@ import { __postComment,__editComment, __deleteComment } from '../redux/modules/c
 
   return (
     <>
-    {props.user_nick==loginId?(
+    {props.user_nick == loginId ? (
     <>
         {editCheck ? 
         (<StCommentBox>
-            <StUserBox><StUserPic src={props.user_pic}/><StUserNick><strong>{props.user_nick}</strong></StUserNick></StUserBox>
-            <StInputBox type="text" ref={text} defaultValue={props.comment}/*onChange={(event)=>setCommenting(event.target.value)}*//>
+            <StUserBox>
+                <StUserPic src={props.user_pic}/>
+                <StUserNick><strong>{props.user_nick}</strong></StUserNick>
+            </StUserBox>
+            <StInputBox type="text" ref={text} defaultValue={props.comment}/>
             <StButton onClick={()=>{submit(text,board_id)}}>Submit</StButton>
         </StCommentBox>):
         (<StCommentBox>
-            <StUserBox><StUserPic src={props.user_pic}/><StUserNick><strong>{props.user_nick}</strong></StUserNick></StUserBox>
+            <StUserBox>
+                <StUserPic src={props.user_pic}/>
+                <StUserNick><strong>{props.user_nick}</strong></StUserNick>
+            </StUserBox>
             <StTextBox>{props.comment}</StTextBox>
-                <StButtons>
-                    <StButton onClick={edit}>Edit</StButton>
-                    <StButton onClick={delet}>Delete</StButton>
-                </StButtons>
+            <StButtons>
+                <StButton onClick={edit}>Edit</StButton>
+                <StButton onClick={delet}>Delete</StButton>
+            </StButtons>
         </StCommentBox>)}
-        </>):
+    </>):
         (<>
         <StCommentBox>
-            <StUserBox><StUserPic src={props.user_pic}/><StUserNick><strong>{props.user_nick}</strong></StUserNick></StUserBox>
+            <StUserBox>
+                <StUserPic src={props.user_pic}/>
+                <StUserNick><strong>{props.user_nick}</strong></StUserNick>
+            </StUserBox>
             <StTextBox>{props.comment}</StTextBox>
         </StCommentBox>
         </>)
@@ -74,51 +83,49 @@ import { __postComment,__editComment, __deleteComment } from '../redux/modules/c
 
 /* STYLED-COMPONENTS */
 
-
 const StButton=  styled.button`
     width:5rem;
     height:2rem;
     margin: 9px 0 9px 1rem;
-    text-align: center;
-    background-color: #2b4553;
+    background-color: #2b45 53;
     color: #46a1d9;
+    text-align: center;
     border:none;
     border-radius: 0.3rem;
+    cursor: pointer;
     &:hover{
         background: #66BFF2;
-background: -moz-linear-gradient(left, #66BFF2 0%, #549EC9 50%, #417A9B 100%);
-background: -webkit-linear-gradient(left, #66BFF2 0%, #549EC9 50%, #417A9B 100%);
-background: linear-gradient(to right, #66BFF2 0%, #549EC9 50%, #417A9B 100%);
-color:white;   
-}
-    cursor: pointer;
+        background: -moz-linear-gradient(left, #66BFF2 0%, #549EC9 50%, #417A9B 100%);
+        background: -webkit-linear-gradient(left, #66BFF2 0%, #549EC9 50%, #417A9B 100%);
+        background: linear-gradient(to right, #66BFF2 0%, #549EC9 50%, #417A9B 100%);
+        color:white;   
+    }
 `;
 
-const StButtons=styled.div`
+const StButtons = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 `;
 
-const StUserNick=styled.p`
-    width:5rem;
-    height:2rem;
-    margin:0 0 0 1rem;
+const StUserNick = styled.p`
+    width: 5rem;
+    height: 2rem;
+    margin: 0 0 0 1rem;
+    color: #7f98af;
     font-size: 0.8rem;
-    color:#7f98af;
-    text-align: center;
     font-weight: 10rem;
+    text-align: center;
 `;
 
-const StUserPic=styled.img`
-    width:4.5rem;
+const StUserPic = styled.img`
+    width: 4.5rem;
     height: 4.5rem;
     background-color: yellow;
-    margin:0 0 0.05rem 0.7rem;
-    
+    margin: 0 0 0.05rem 0.7rem;
 `;
 
-const StUserBox=styled.div`
+const StUserBox = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -139,11 +146,10 @@ const StInputBox=styled.input`
 const StTextBox = styled.div`
     display: flex;
     align-items: center;
-    text-align: center;
     width:500px;
     height:8rem;
     margin:0 0 0 3rem;
-   // background-color: 
+    text-align: center; 
 `;
 
 const StCommentBox=styled.div`
@@ -155,6 +161,5 @@ const StCommentBox=styled.div`
     background-color: rgba(39,65,86,255);
     border-top: 2px solid #264357;
 `;
-
 
 export default Comment;

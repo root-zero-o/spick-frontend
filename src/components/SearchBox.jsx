@@ -2,9 +2,9 @@ import React  from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 // import Hook
 import { useGetPosts } from '../Hooks/useGetPosts';
-//
+// import Component
 import Card from './Card';
-//
+// import middleware
 import { __searchNum } from "../redux/modules/search";
 
 const SearchContainer = () => {

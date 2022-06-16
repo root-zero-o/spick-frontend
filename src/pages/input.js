@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { useDispatch  } from 'react-redux';
-import styled from 'styled-components'
 import { Link, useNavigate } from 'react-router-dom';
+import styled from 'styled-components'
 // import components
 import Header from '../components/Header';
 // import middleware
@@ -145,10 +145,10 @@ const StImgBox = styled.div`
 
 export const StLabel = styled.label`
   display: block;
-  background: rgb(79,200,47);
   width: 345px;
   margin-left: 20px;
   padding: 10px;
+  background: rgb(79,200,47);
   background: linear-gradient(135deg, rgba(79,200,47,1) 0%, rgba(25,177,78,1) 79%);
   color: white;
   text-align: center;

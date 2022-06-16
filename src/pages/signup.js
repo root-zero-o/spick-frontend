@@ -1,24 +1,26 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { useSelector } from 'react-redux/es/exports';
-import { useRef } from 'react';
-import { __signUp, __loadUser, __idCheck, __nickCheck } from '../redux/modules/user';
+import styled from 'styled-components'
 import "./signup.css";
+// import middleware
+import { __signUp, __idCheck, __nickCheck } from '../redux/modules/user';
+// import firebase
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../shared/firebase";
 
 
 const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const user_email = useRef(null);
   const user_nickname = useRef(null);
   const password = useRef(null);
   const passwordCheck = useRef(null);
+
   const reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+  
   const [fileView, setFileView] = useState("");
   const [fileUploaded, setFileUploaded] = useState(false);
   const [fileURL, setFileURL] = useState("");
@@ -109,7 +111,7 @@ const Signup = () => {
       <br/>
       
       <Box>
-        <StEmail>Email Adress</StEmail>
+        <StEmail>Email Address</StEmail>
         <CheckBox>
           <StInput placeholder='이메일 형식으로 입력해주세요' type="email" ref={user_email}/>
           <IdCheckButton onClick={emailCheck}>Email Check</IdCheckButton>
@@ -196,18 +198,18 @@ const IdCheckButton=styled.button`
   margin : 0 0 0 0.5rem;
   background: #3DA2F1;
   border-radius: 2px;
-background: -moz-linear-gradient(left, #3DA2F1 0%, #3184E1 44%, #2460D0 100%);
-background: -webkit-linear-gradient(left, #3DA2F1 0%, #3184E1 44%, #2460D0 100%);
-background: linear-gradient(to right, #3DA2F1 0%, #3184E1 44%, #2460D0 100%);
-border: none;
-text-align: center;
-color:white;
-&:hover{
-  background: #47BFFF;
-background: -moz-linear-gradient(left, #47BFFF 0%, #3EA8F3 50%, #3287E3 100%);
-background: -webkit-linear-gradient(left, #47BFFF 0%, #3EA8F3 50%, #3287E3 100%);
-background: linear-gradient(to right, #47BFFF 0%, #3EA8F3 50%, #3287E3 100%);
-}
+  background: -moz-linear-gradient(left, #3DA2F1 0%, #3184E1 44%, #2460D0 100%);
+  background: -webkit-linear-gradient(left, #3DA2F1 0%, #3184E1 44%, #2460D0 100%);
+  background: linear-gradient(to right, #3DA2F1 0%, #3184E1 44%, #2460D0 100%);
+  border: none;
+  text-align: center;
+  color:white;
+  &:hover{
+    background: #47BFFF;
+  background: -moz-linear-gradient(left, #47BFFF 0%, #3EA8F3 50%, #3287E3 100%);
+  background: -webkit-linear-gradient(left, #47BFFF 0%, #3EA8F3 50%, #3287E3 100%);
+  background: linear-gradient(to right, #47BFFF 0%, #3EA8F3 50%, #3287E3 100%);
+  }
 cursor: pointer;
 `;
 
@@ -218,18 +220,18 @@ const StSubmit = styled.button`
   margin : 0 0 0 10%;
   background: #3DA2F1;
   border-radius: 2px;
-background: -moz-linear-gradient(left, #3DA2F1 0%, #3184E1 44%, #2460D0 100%);
-background: -webkit-linear-gradient(left, #3DA2F1 0%, #3184E1 44%, #2460D0 100%);
-background: linear-gradient(to right, #3DA2F1 0%, #3184E1 44%, #2460D0 100%);
-border: none;
-text-align: center;
-color:white;
-&:hover{
-  background: #47BFFF;
-background: -moz-linear-gradient(left, #47BFFF 0%, #3EA8F3 50%, #3287E3 100%);
-background: -webkit-linear-gradient(left, #47BFFF 0%, #3EA8F3 50%, #3287E3 100%);
-background: linear-gradient(to right, #47BFFF 0%, #3EA8F3 50%, #3287E3 100%);
-}
+  background: -moz-linear-gradient(left, #3DA2F1 0%, #3184E1 44%, #2460D0 100%);
+  background: -webkit-linear-gradient(left, #3DA2F1 0%, #3184E1 44%, #2460D0 100%);
+  background: linear-gradient(to right, #3DA2F1 0%, #3184E1 44%, #2460D0 100%);
+  border: none;
+  text-align: center;
+  color:white;
+  &:hover{
+    background: #47BFFF;
+  background: -moz-linear-gradient(left, #47BFFF 0%, #3EA8F3 50%, #3287E3 100%);
+  background: -webkit-linear-gradient(left, #47BFFF 0%, #3EA8F3 50%, #3287E3 100%);
+  background: linear-gradient(to right, #47BFFF 0%, #3EA8F3 50%, #3287E3 100%);
+  }
 cursor: pointer;
 `;
 
@@ -239,17 +241,17 @@ const StCancel = styled.button`
   margin : 0 0 0 10%;
   background: #3DA2F1;
   border-radius: 2px;
-background: -moz-linear-gradient(left, #3DA2F1 0%, #3184E1 44%, #2460D0 100%);
-background: -webkit-linear-gradient(left, #3DA2F1 0%, #3184E1 44%, #2460D0 100%);
-background: linear-gradient(to right, #3DA2F1 0%, #3184E1 44%, #2460D0 100%);
-border: none;
-text-align: center;
-color:white;
-&:hover{
-  background: #47BFFF;
-background: -moz-linear-gradient(left, #47BFFF 0%, #3EA8F3 50%, #3287E3 100%);
-background: -webkit-linear-gradient(left, #47BFFF 0%, #3EA8F3 50%, #3287E3 100%);
-background: linear-gradient(to right, #47BFFF 0%, #3EA8F3 50%, #3287E3 100%);
+  background: -moz-linear-gradient(left, #3DA2F1 0%, #3184E1 44%, #2460D0 100%);
+  background: -webkit-linear-gradient(left, #3DA2F1 0%, #3184E1 44%, #2460D0 100%);
+  background: linear-gradient(to right, #3DA2F1 0%, #3184E1 44%, #2460D0 100%);
+  border: none;
+  text-align: center;
+  color:white;
+  &:hover{
+    background: #47BFFF;
+  background: -moz-linear-gradient(left, #47BFFF 0%, #3EA8F3 50%, #3287E3 100%);
+  background: -webkit-linear-gradient(left, #47BFFF 0%, #3EA8F3 50%, #3287E3 100%);
+  background: linear-gradient(to right, #47BFFF 0%, #3EA8F3 50%, #3287E3 100%);
 }
 cursor: pointer;
 `;
@@ -274,10 +276,10 @@ const StTitle = styled.p`
   color:white;
 `;
 const StBox = styled.div`
-width:100%;
-height:100%;
-display: flex;
-justify-content: center;
+  width:100%;
+  height:100%;
+  display: flex;
+  justify-content: center;
 `;
 const StInBox = styled.div`
   width:39rem;
@@ -293,16 +295,17 @@ font-size:12px;
 margin:0 0 0 0;
 `;
 const StSignBox =styled.div`
-  width:41rem;
-  height:50rem;
-  min-height: 50rem;
-  min-width: 41rem;
-  background: #212934;
-background: -moz-linear-gradient(top, #212934 0%, #272B30 57%, #2A2E33 100%);
-background: -webkit-linear-gradient(top, #212934 0%, #272B30 57%, #2A2E33 100%);
-background: linear-gradient(to bottom, #212934 0%, #272B30 57%, #2A2E33 100%);
-border:1px solid #16191C;
+    width:41rem;
+    height:50rem;
+    min-height: 50rem;
+    min-width: 41rem;
+    background: #212934;
+  background: -moz-linear-gradient(top, #212934 0%, #272B30 57%, #2A2E33 100%);
+  background: -webkit-linear-gradient(top, #212934 0%, #272B30 57%, #2A2E33 100%);
+  background: linear-gradient(to bottom, #212934 0%, #272B30 57%, #2A2E33 100%);
+  border:1px solid #16191C;
 `;
+
 const StBack = styled.div`
   display: flex;
   justify-content: center;
