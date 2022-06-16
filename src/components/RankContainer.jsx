@@ -6,7 +6,7 @@ import styled from "styled-components";
 // import images
 import leftArrow from "../images/left-arrow.png";
 import rightArrow from "../images/right-arrow.png";
-
+// import Hook
 import { useGetRank } from '../Hooks/useGetRank';
 
 // Rank map돌리는 컴포넌트
@@ -30,7 +30,6 @@ const RankContainer = () => {
     }, 2500)
   }
   
-
   return (
     <StContainer>
       <div style={{display: "flex", alignItems:"center"}}>
@@ -57,9 +56,6 @@ const RankContainer = () => {
   )
 }
 
-
-
-
 /* STYLED-COMPONENTS */
 
 const StContainer = styled.div`
@@ -78,16 +74,16 @@ const StRankWrap = styled.div`
   align-items: center;
   width: 700px;
   height: 230px;
-  background-color: rgba(0,0,0,0.1);
-  overflow: hidden;
   margin: 0px 10px;
   padding: 0px 10px;
+  background-color: rgba(0,0,0,0.1);
+  overflow: hidden;
   float: left;
   `;
 
 const StArrow = styled.img`
-  height: 30%;
   width: 30px;
+  height: 30%;
   background: rgba(0,0,0,0.3);
   box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
   border: none;
@@ -101,8 +97,8 @@ const StDot = styled.div`
   width: 10px;
   height: 10px;
   margin: 10px 3px;
-  border-radius: 50%;
   background-color: white;
+  border-radius: 50%;
   &:first-child{
     opacity : ${props => props.isLeft === 240 ? "1" : "0.2"};
   }

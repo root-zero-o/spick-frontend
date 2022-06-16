@@ -23,6 +23,7 @@ const DetailBox = () => {
 
   const { data } = useGetPosts();
   const post = data?.find(value => postId === value.board_id);
+
   const onDeletePostHandler = () => {
     dispatch(deletePostDB(post?.board_id));
     dispatch(deleteImgFB(post?.board_imgURL))
@@ -111,8 +112,8 @@ const StLikeLogo = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #1a435e;
   width: 60px;
+  background-color: #1a435e;
   &:hover{
     opacity: 0.5;
     cursor: pointer;
