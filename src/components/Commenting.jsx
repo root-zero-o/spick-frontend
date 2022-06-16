@@ -1,43 +1,35 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { useRef } from 'react'
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { useRef } from 'react';
-import { __postComment } from '../redux/modules/comment';
 import { useParams } from 'react-router-dom';
+import styled from 'styled-components'
+import { __postComment } from '../redux/modules/comment';
 import { getCookie } from '../Cookie';
 import { useGetPosts } from '../Hooks/useGetPosts';
 
 const Commenting = ({board_id}) => {
    
     const dispatch=useDispatch();
-    const navigate = useNavigate();
     const reply_text=useRef(null);
     const postId = Number(useParams().board_id);
 
     const {data} = useGetPosts();
     const board = data?.find(value=>value.board_id == postId)
     const board_title = board?.board_title;
-
    
     const submit=()=>{
         dispatch(__postComment({
             reply_text: reply_text.current.value,
             board_id:board_id,
         }))
-        alert("댓글이 등록되었습니다.")
-        navigate(`/detail/${board_id}`);
+        alert("댓글이 등록되었습니다.");
+        window.location.reload();
     }
     
-
-
-    const isToken = getCookie("token");
     const user_nick = getCookie("user_nick");
     const user_pic = getCookie("user_pic");
     
   return (
-    <StCommentBox>
-        
+    <StCommentBox> 
         <StTitle> {board_title} 제품에 대한 평가 작성</StTitle>
         <StBody>
             <StUserBox>
@@ -45,8 +37,7 @@ const Commenting = ({board_id}) => {
                 <StUserNick>{user_nick}</StUserNick>
             </StUserBox>
             <StInputBox ref={reply_text}/>
-           <StSubmitButton onClick={submit}>Submit</StSubmitButton>:
-            
+           <StSubmitButton onClick={submit}>Submit</StSubmitButton>:   
         </StBody>
     </StCommentBox>
   )

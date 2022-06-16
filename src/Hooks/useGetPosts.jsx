@@ -9,5 +9,5 @@ export const useGetPosts = () => {
         return data;
       };
 
-  return useQuery("posts", fetcher, {staleTime:Infinity}); 
+  return useQuery("posts", fetcher); 
 }
