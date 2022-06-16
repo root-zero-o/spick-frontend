@@ -16,7 +16,6 @@ const RankContainer = () => {
   const [isLeft, setIsLeft] = useState(0);
 
   const {data} = useGetRank();
-  console.log(data);
 
   const onLeftClick = () => {
     setIsLeft(240)

@@ -14,8 +14,8 @@ const Commenting = ({board_id}) => {
     const postId = Number(useParams().board_id);
 
     const {data} = useGetPosts();
-    const board = data.find(value=>value.board_id == postId)
-    const board_title = board.board_title;
+    const board = data?.find(value=>value.board_id == postId)
+    const board_title = board?.board_title;
 
    
     const submit=(event)=>{
