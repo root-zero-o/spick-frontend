@@ -39,6 +39,7 @@ const RankContainer = () => {
           <StRankWrap styleName="container">
             {data?.map((value,index)=>{
                     return <Rank
+                        key = {index}
                         isLeft = {isLeft}
                         board_id={value.board_id}
                         board_imgURL={value.board_imgURL}
