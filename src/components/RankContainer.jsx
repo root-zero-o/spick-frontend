@@ -77,7 +77,7 @@ const StRankWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 710px;
+  width: 700px;
   height: 230px;
   background-color: rgba(0,0,0,0.1);
   overflow: hidden;
