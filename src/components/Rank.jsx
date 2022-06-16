@@ -40,7 +40,7 @@ const StRankWrap = styled.div`
 
 const StRankCard = styled.div`
     width: 230px;
-    height: 100%;
+    height: 200px;
     background: rgb(49,81,110);
     background: -moz-linear-gradient(left, rgb(49,81,110) 0%, rgb(63,119,151) 100%);
     background: -webkit-linear-gradient(left, rgb(49,81,110) 0%, rgb(63,119,151) 100%);
@@ -57,7 +57,7 @@ const StRankCard = styled.div`
 
 const StImg = styled.img`
   width: 233px;
-  height: 100%;
+  height: 150px;
   overflow: hidden;
   background-color: #ddd;
   
@@ -67,7 +67,7 @@ const StText = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  height: 20%;  
+  height: 40px;  
   margin-right: 5px;
 `;
 
@@ -76,7 +76,7 @@ const StLike = styled.div`
   justify-content: center;
   align-items: center;
   width: 70px;
-  height: 60%;
+  height: 30px;
   background-color: #2d5069;
   color: #a9daf2;
   font-size: 13px;
