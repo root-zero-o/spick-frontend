@@ -46,7 +46,7 @@ import { __postComment,__editComment, __deleteComment } from '../redux/modules/c
     // user_pic={value.reply_picURL}
     // user_nick={value.reply_nickname}/>
 
-    console.log(props);
+
   return (
     <>
     {props.user_nick==loginId?(

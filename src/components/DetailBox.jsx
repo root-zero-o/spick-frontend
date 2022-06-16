@@ -22,8 +22,7 @@ const DetailBox = () => {
   const postId = Number(useParams().board_id);
 
   const { data } = useGetPosts();
-  const post = data.find(value => postId === value.board_id);
-  console.log(post);
+  const post = data?.find(value => postId === value.board_id);
   const onDeletePostHandler = () => {
     dispatch(deletePostDB(post?.board_id));
     dispatch(deleteImgFB(post?.board_imgURL))
@@ -36,7 +35,7 @@ const DetailBox = () => {
   return (
     <StDetailContainer>
       <StDetailBox>
-        <h2 style={{color:"white"}}>{post.board_title}</h2>
+        <h2 style={{color:"white"}}>{post?.board_title}</h2>
         <StDiv>
           <StImg src={post?.board_imgURL}></StImg>
           <StContentBox>
