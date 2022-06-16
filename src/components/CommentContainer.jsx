@@ -16,8 +16,8 @@ const CommentContainer = ({board_id}) => {
   // },[dispatch])
 
   const {data} = useGetComment({board_id});
+  console.log(data);
 
-  
   return (
     <>
     {getCookie("token")===undefined?<></>:<Commenting board_id={board_id} />}
@@ -30,7 +30,9 @@ const CommentContainer = ({board_id}) => {
               board_id={board_id}
               comment={value.reply_text}
               user_pic={value.reply_picURL}
-              user_nick={value.reply_nickname}/>
+              user_nick={value.reply_nickname}
+              createAt = {value.createAt}/>
+
         })
       }
     </>
