@@ -7,12 +7,16 @@ import styled from "styled-components";
 import leftArrow from "../images/left-arrow.png";
 import rightArrow from "../images/right-arrow.png";
 
+import { useGetRank } from '../Hooks/useGetRank';
+
 // Rank map돌리는 컴포넌트
 
 const RankContainer = () => {
 
   const [isLeft, setIsLeft] = useState(0);
 
+  const {data} = useGetRank();
+  console.log(data);
 
   const onLeftClick = () => {
     setIsLeft(240)
@@ -33,11 +37,15 @@ const RankContainer = () => {
       <div style={{display: "flex", alignItems:"center"}}>
         <StArrow src={leftArrow} onClick={onLeftClick}/>
           <StRankWrap styleName="container">
-            <Rank isLeft={isLeft}/>
-            <Rank isLeft={isLeft}/>
-            <Rank isLeft={isLeft}/>
-            <Rank isLeft={isLeft}/>
-            <Rank isLeft={isLeft}/>
+            {data?.map((value,index)=>{
+                    return <Rank
+                        key = {index}
+                        isLeft = {isLeft}
+                        board_id={value.board_id}
+                        board_imgURL={value.board_imgURL}
+                        replycount={value.replycount}
+                        user_pic={value.user_picURL}
+                        user_nick={value.user.nickname}/>})}
           </StRankWrap>
         <StArrow src={rightArrow} onClick={onRightClick}/>
       </div>
@@ -49,6 +57,9 @@ const RankContainer = () => {
     </StContainer>
   )
 }
+
+
+
 
 /* STYLED-COMPONENTS */
 

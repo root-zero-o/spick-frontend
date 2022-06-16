@@ -5,42 +5,40 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components'
 import { getCookie } from '../Cookie';
-import { __postComment,__editComment } from '../redux/modules/comment';
+import { __postComment,__editComment, __deleteComment } from '../redux/modules/comment';
 
 // 댓글 박스 하나 나타내는 컴포넌트!
 
  const Comment = (props) => {
-    const loginId = getCookie("user_id");
+    const loginId = getCookie("user_nick");
     const dispatch = useDispatch();
     const text = useRef(null);
     const board_id = useParams().id;
     const [commenting,setCommenting]=useState(true);
     const [editCheck , setEditCheck]=useState(false);
+
     
     const edit=()=>{
         setEditCheck(true);
-        dispatch(__editComment({
-            reply_id:props.user_id,
-            reply_nickname:props.user_nick,
-            reply_picURL:props.user_pic,
-            reply_text:text.current.value,
-            board_id:props.board_id,
-        }))
     }
     
     const delet=()=>{
-        
+        dispatch(__deleteComment({
+            reply_id:props.id,
+            board_id:props.board_id}))
+        alert("Comment has been deleted!")
     }
 
     const submit=(text,board_id)=>{
-        dispatch(__postComment({
-            reply_id:props.user_id,
+        dispatch(__editComment({
+            reply_id:props.id,
             reply_nickname:props.user_nick,
             reply_picURL:props.user_pic,
             reply_text:text.current.value,
             board_id:props.board_id,
         }))
     }
+
     // key = {index}
     // id={value.id} 
     // comment={value.reply_text} 
@@ -51,12 +49,12 @@ import { __postComment,__editComment } from '../redux/modules/comment';
     console.log(props);
   return (
     <>
-    {props.user_id==loginId?(
+    {props.user_nick==loginId?(
     <>
         {editCheck ? 
         (<StCommentBox>
             <StUserBox><StUserPic src={props.user_pic}/><StUserNick><strong>{props.user_nick}</strong></StUserNick></StUserBox>
-            <StInputBox type="text" value={props.comment} ref={text}/*onChange={(event)=>setCommenting(event.target.value)}*//>
+            <StInputBox type="text" ref={text}/*onChange={(event)=>setCommenting(event.target.value)}*//>
             <StButton onClick={()=>{submit(text,board_id)}}>Submit</StButton>
         </StCommentBox>):
         (<StCommentBox>

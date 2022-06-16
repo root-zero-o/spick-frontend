@@ -32,7 +32,7 @@ const Header = () => {
 
     // 검색어 입력 버튼 이벤트
     const onSearchHandler = () => {
-        const replacedInput = searchInput.current.value.replace(/ /g,"");
+        const replacedInput = searchInput.current.value;
         console.log(replacedInput)
         dispatch(__search(replacedInput))
     }
@@ -125,9 +125,14 @@ const StBtn = styled.button`
     color: white;
     font-size: 15px;
     border: none;
+    transition: transform 0.3s ease-in-out;
     &:hover{
         background: #307FC0;
         cursor: pointer;
+        transform: translateY(-3px);
+        
+        height: 52px;
+        border: 1px solid white;
     }
 `;
 

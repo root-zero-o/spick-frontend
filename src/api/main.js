@@ -14,21 +14,15 @@ const apis = {
         board_text : text,
     }),
 
-
-    getComments : ({board_id})=> api.get(`/api/detail/${board_id}`),
+    getComments : ({board_id})=> api.get(`/api/detail/${board_id}/reply`),
     postComment : (payload)=> api.post(`/api/detail/${payload.board_id}/reply`,{
         reply_text: payload.reply_text,
     }),
-    deleteComment : ()=> api.delete(`/api/detail/boardid/reid`),
-    putComment : (payload)=> api.put(`/api/detail/boardid/reid`,{
-        reply_id: payload.reply_id,
-        reply_nickname: payload.reply_nickname,
-        reply_picURL: payload.reply_picURL,
+    deleteComment : (payload)=> api.delete(`/api/detail/${payload.board_id}/${payload.reply_id}`),
+    putComment : (payload)=> api.put(`/api/detail/${payload.board_id}/${payload.reply_id}`,{
         reply_text: payload.reply_text,
-        board_id:payload.board_id,
-    })
-
-
+    }),
+    getRank : ()=>api.get(`/api/best`)
 }
 
 export default apis;

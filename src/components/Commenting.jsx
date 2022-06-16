@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux';
 import { useRef } from 'react';
@@ -15,9 +15,9 @@ const Commenting = ({board_id}) => {
 
     const {data} = useGetPosts();
     const board = data.find(value=>value.board_id == postId)
-    console.log(board);
     const board_title = board.board_title;
 
+   
     const submit=(event)=>{
         
         event.preventDefault();
