@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { __postComment } from '../redux/modules/comment';
 import { useParams } from 'react-router-dom';
 import { getCookie } from '../Cookie';
 import { useGetPosts } from '../Hooks/useGetPosts';
+import win from 'global';
 
 const Commenting = ({board_id}) => {
    
@@ -19,6 +20,8 @@ const Commenting = ({board_id}) => {
     const board = data?.find(value=>value.board_id == postId)
     const board_title = board?.board_title;
 
+    const [input,setInput] = useState(null);
+
    
     const submit=()=>{
         dispatch(__postComment({
@@ -26,7 +29,7 @@ const Commenting = ({board_id}) => {
             board_id:board_id,
         }))
         alert("댓글이 등록되었습니다.")
-        navigate(`/detail/${board_id}`);
+        window.location.reload();
     }
     
 
