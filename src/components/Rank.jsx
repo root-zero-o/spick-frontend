@@ -1,17 +1,20 @@
 /* IMPORT */
 import React from 'react'
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 // Rank 부분 카드 하나하나를 나타내는 컴포넌트
 const Rank = (props) => {
   return (
     <StRankWrap isLeft={props.isLeft}>
+      <Link to ={`/detail/${props.board_id}`}>
         <StRankCard>
             <StImg src={props.board_imgURL}></StImg>
             <StText>
               <StLike>댓글 {props.replycount}개</StLike>
             </StText>
         </StRankCard>
+        </Link>
     </StRankWrap>
   )
 }
