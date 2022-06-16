@@ -7,19 +7,25 @@ import { Link } from 'react-router-dom';
 const Rank = (props) => {
   return (
     <StRankWrap isLeft={props.isLeft}>
-      <Link to ={`/detail/${props.board_id}`}>
+      <StLink to ={`/detail/${props.board_id}`}>
         <StRankCard>
             <StImg src={props.board_imgURL}></StImg>
             <StText>
               <StLike>댓글 {props.replycount}개</StLike>
             </StText>
         </StRankCard>
-        </Link>
+        </StLink>
     </StRankWrap>
   )
 }
 
 /* STYLED-COMPONENTS */
+
+const StLink = styled(Link)`
+  text-decoration: none;
+
+`;
+
 
 const StRankWrap = styled.div`
     display: flex;
