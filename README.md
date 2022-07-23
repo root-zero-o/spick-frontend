@@ -1,6 +1,5 @@
 # SPICK !🎮
 *Steam 게임 리뷰를 모아보자!* <br>
-http://seokwoo.shop.s3-website.ap-northeast-2.amazonaws.com/
 <br><br>
 
 ## 프로젝트 개요
